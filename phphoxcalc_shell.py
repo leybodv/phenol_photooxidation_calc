@@ -12,12 +12,13 @@ class PhPhOxCalcShell(cmd.Cmd):
         """
         print(f'Hello world: {arg}')
 
-    def do_quit(self):
+    def do_quit(self, arg):
         """
         Quits program
         """
         print('bye')
         return True
 
-    if __name__ == '__main__':
-        PhPhOxCalcShell().cmdloop()
+if __name__ == '__main__':
+    print(f'{dir() = }')
+    PhPhOxCalcShell().cmdloop()

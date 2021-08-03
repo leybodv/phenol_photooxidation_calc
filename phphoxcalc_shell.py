@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import cmd
+from experiment import Experiment
 
 class PhPhOxCalcShell(cmd.Cmd):
     intro = 'Process data of phenol photooxidation experiment. Type help or ? to list commands.\n'
@@ -28,6 +29,7 @@ class PhPhOxCalcShell(cmd.Cmd):
         """
         print(f'PhPhOxCalcShell().do_addexperiment(self, arg):') #LOG
         arguments = self.parse_args(arg)
+        self.experiments.append(Experiment(arguments['sample_name'], arguments['raw_data_path']))
 
     def do_quit(self, arg):
         """

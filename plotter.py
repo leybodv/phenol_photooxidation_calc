@@ -31,6 +31,7 @@ class Plotter():
         """
         """
         print(f'Plotter().plotrawexperiment(ax, experiment):') #LOG
+        ax.set_title(experiment.sample_name)
         for data_point in experiment.data_points:
             ax.plot(data_point.wavelength, data_point.absorbance, label=data_point.time)
         return ax

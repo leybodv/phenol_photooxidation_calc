@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 class Plotter():
 
-    def plotrawdata(experiments):
+    def plotrawdata(self, experiments):
         """
         """
         print(f'Plotter().plotrawdata(experiments):') #LOG

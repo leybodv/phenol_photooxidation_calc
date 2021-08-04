@@ -34,4 +34,5 @@ class Plotter():
         ax.set_title(experiment.sample_name)
         for data_point in experiment.data_points:
             ax.plot(data_point.wavelength, data_point.absorbance, label=data_point.time)
+            print(f'{ax.get_children[0].get_label() = }') #LOG
         return ax

@@ -2,6 +2,8 @@
 
 import math
 import matplotlib.pyplot as plt
+from experiment import Experiment
+from datapoint import DataPoint
 
 class Plotter():
 
@@ -9,7 +11,22 @@ class Plotter():
         """
         """
         print(f'Plotter().plotrawdata(experiments):') #LOG
+        exps_copy = experiments.copy()
         cols = math.ceil(math.sqrt(len(experiments)))
         rows = math.ceil(len(experiments) / cols)
         fig, axs = plt.subplots(nrows=rows, ncols=cols)
         print(f'{axs = }') #LOG
+        for row in range(rows):
+            for col in range(cols):
+                if not bool(exps_copy):
+                    break
+                self.plotrawexperiment(axs[row,col], exps_copy.pop(0))
+        plt.show()
+
+    def plotrawexperiment(ax, experiment):
+        """
+        """
+        print(f'Plotter().plotrawexperiment(ax, experiment):') #LOG
+        for data_point in experiment.data_points:
+            ax.plot(data_point.wavelength, data_point.absorbance, label=data_point.time)
+        return ax

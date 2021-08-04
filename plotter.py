@@ -27,7 +27,7 @@ class Plotter():
                     self.plotrawexperiment(axs[row,col], exps_copy.pop(0))
         plt.show()
 
-    def plotrawexperiment(ax, experiment):
+    def plotrawexperiment(self, ax, experiment):
         """
         """
         print(f'Plotter().plotrawexperiment(ax, experiment):') #LOG

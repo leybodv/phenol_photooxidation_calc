@@ -11,16 +11,20 @@ class Plotter():
         """
         """
         print(f'Plotter().plotrawdata(experiments):') #LOG
-        exps_copy = experiments.copy()
-        cols = math.ceil(math.sqrt(len(experiments)))
-        rows = math.ceil(len(experiments) / cols)
-        fig, axs = plt.subplots(nrows=rows, ncols=cols)
-        print(f'{axs = }') #LOG
-        for row in range(rows):
-            for col in range(cols):
-                if not bool(exps_copy):
-                    break
-                self.plotrawexperiment(axs[row,col], exps_copy.pop(0))
+        if len(experiments) == 1:
+            fig, ax = plt.subplots()
+            self.plotrawexperiment(ax, experiments[0])
+        else:
+            exps_copy = experiments.copy()
+            cols = math.ceil(math.sqrt(len(experiments)))
+            rows = math.ceil(len(experiments) / cols)
+            fig, axs = plt.subplots(nrows=rows, ncols=cols)
+            print(f'{axs = }') #LOG
+            for row in range(rows):
+                for col in range(cols):
+                    if not bool(exps_copy):
+                        break
+                    self.plotrawexperiment(axs[row,col], exps_copy.pop(0))
         plt.show()
 
     def plotrawexperiment(ax, experiment):

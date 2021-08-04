@@ -9,3 +9,4 @@ class DataPoint():
         self.wavelength = wavelength
         self.absorbance = absorbance
         print(f'DataPoint().__init__(self, time, wavelength, absorbance):') #LOG
+        print(f'{self.time = }') #LOG

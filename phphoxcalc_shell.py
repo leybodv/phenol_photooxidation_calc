@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 
+# TODO: docs
+
 import cmd
 from experiment import Experiment
+import matplotlib.pyplot as plt
 
 class PhPhOxCalcShell(cmd.Cmd):
     intro = 'Process data of phenol photooxidation experiment. Type help or ? to list commands.\n'
@@ -30,6 +33,17 @@ class PhPhOxCalcShell(cmd.Cmd):
         print(f'PhPhOxCalcShell().do_addexperiment(self, arg):') #LOG
         arguments = self.parse_args(arg)
         self.experiments.append(Experiment(arguments['sample_name'], arguments['raw_data_path']))
+
+    def do_plotrawdata(self, arg):
+        """
+        """
+        if not bool(self.experiments):
+            print(f'You need to add experiments first. Type help or ? to list commands.')
+            return
+        plt.ioff()
+        fig, ax = plt.subplots()
+        plotter.plotrawdata(ax, self.experiments)
+        plt.show()
 
     def do_quit(self, arg):
         """

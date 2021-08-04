@@ -4,7 +4,7 @@
 
 import cmd
 from experiment import Experiment
-import matplotlib.pyplot as plt
+from plotter import Plotter
 
 class PhPhOxCalcShell(cmd.Cmd):
     intro = 'Process data of phenol photooxidation experiment. Type help or ? to list commands.\n'
@@ -40,10 +40,7 @@ class PhPhOxCalcShell(cmd.Cmd):
         if not bool(self.experiments):
             print(f'You need to add experiments first. Type help or ? to list commands.')
             return
-        plt.ioff()
-        fig, ax = plt.subplots()
-        plotter.plotrawdata(ax, self.experiments)
-        plt.show()
+        Plotter().plotrawdata(self.experiments)
 
     def do_quit(self, arg):
         """

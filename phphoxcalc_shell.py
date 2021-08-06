@@ -11,12 +11,6 @@ class PhPhOxCalcShell(cmd.Cmd):
     prompt = '> '
     experiments = list() #experiment space
 
-    def do_helloworld(self, arg):
-        """
-        Prints "Hello world" and all arguments passed here
-        """
-        print(f'Hello world: {arg}')
-
     def do_addexperiment(self, arg):
         """
         Adds experiment results to the experiment's space.

@@ -10,6 +10,7 @@ class PhPhOxCalcShell(cmd.Cmd):
     intro = 'Process data of phenol photooxidation experiment. Type help or ? to list commands.\n'
     prompt = '> '
     experiments = list() #experiment space
+    calibrations = list() #calibrations space
 
     def do_addexperiment(self, arg):
         """
@@ -27,6 +28,13 @@ class PhPhOxCalcShell(cmd.Cmd):
         print(f'PhPhOxCalcShell().do_addexperiment(self, arg):') #LOG
         arguments = self.parse_args(arg)
         self.experiments.append(Experiment(arguments['sample_name'], arguments['raw_data_path']))
+
+    def do_addcalibration(self, arg):
+        """
+        """
+        print(f'PhPhOxCalcShell().do_addcalibraion(self, arg):') #LOG
+        arguments = self.parse_args(arg)
+        self.calibrations.append(Calibration(arguments['solute'], arguments['solvent'], ...) # TODO i'm here
 
     def do_plotrawdata(self, arg):
         """

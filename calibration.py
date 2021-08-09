@@ -1,7 +1,7 @@
 # TODO: docs
 
 from pathlib import Path
-from uvvisparser import UvVisParser # TODO: make class
+from uvvisparser import UvVisParser
 from calibrationpoint import CalibrationPoint # TODO: make class
 import scipy.optimize as spopt
 

@@ -34,7 +34,7 @@ class PhPhOxCalcShell(cmd.Cmd):
         """
         print(f'PhPhOxCalcShell().do_addcalibraion(self, arg):') #LOG
         arguments = self.parse_args(arg)
-        self.calibrations.append(Calibration(arguments['solute'], arguments['solvent'], ...) # TODO i'm here
+        self.calibrations.append(Calibration(arguments['solute'], arguments['solvent'], arguments['calibration_folder'])
 
     def do_plotrawdata(self, arg):
         """

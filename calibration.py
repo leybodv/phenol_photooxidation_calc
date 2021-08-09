@@ -2,7 +2,7 @@
 
 from pathlib import Path
 from uvvisparser import UvVisParser
-from calibrationpoint import CalibrationPoint # TODO: make class
+from calibrationpoint import CalibrationPoint
 import scipy.optimize as spopt
 
 class Calibration():
@@ -35,7 +35,7 @@ class Calibration():
         absorbances = list()
         concentrations = list()
         for calibration_point in calibration_points:
-            absorbances.append(calibration_point.get_absorbance_at(calibration_wavelength)) # TODO: add method to class CalibrationPoint 
+            absorbances.append(calibration_point.get_absorbance_at(calibration_wavelength))
             concentrations.append(calibration_point.concentration)
         popt, pcov = spopt.curve_fit(self.linear_func, concentrations, absorbances)
         return popt[0]

@@ -7,7 +7,7 @@ import scipy.optimize as spopt
 
 class Calibration():
 
-    def __init__(self, solute, solvent, calibration_wavelength, calibration_folder): # TODO: add parameter to method invocation in PhPhOx_Shell
+    def __init__(self, solute, solvent, calibration_wavelength, calibration_folder):
         """
         """
         print(f'__init__(self, solute, solvent, calibration_wavelength, calibration_folder):') #LOG

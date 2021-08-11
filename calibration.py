@@ -7,22 +7,22 @@ import scipy.optimize as spopt
 
 class Calibration():
 
-    def __init__(self, solute, solvent, calibration_wavelength, calibration_folder):
+    def __init__(self, solute, solvent, folder):
         """
         """
-        print(f'__init__(self, solute, solvent, calibration_wavelength, calibration_folder):') #LOG
+        print(f'__init__(self, solute, solvent, folder):') #LOG
         self.solute = solute
         self.solvent = solvent
-        self.calibration_wavelength = calibration_wavelength
-        self.calibration_points = self.parse_calibration_data(calibration_folder)
+        self.calibration_points = self.parse_calibration_data(folder)
+        self.calibration_wavelength = self.get_wavelength_from_user(self.calibration_points)
         self.calibration_coefficient = self.find_calibration_coefficient(calibration_wavelength, self.calibration_points)
 
-    def parse_calibration_data(self, calibration_folder):
+    def parse_calibration_data(self, folder):
         """
         """
-        print(f'parse_calibration_data(self, calibration_folder):') #LOG
+        print(f'parse_calibration_data(self, folder):') #LOG
         calibration_points = list()
-        for file in Path(calibration_folder).iterdir():
+        for file in Path(folder).iterdir():
             if file.is_file():
                 concentration, wavelength, absorbance = UvVisParser().parse_calibration_from_file(file)
                 calibration_points.append(CalibrationPoint(concentration, wavelength, absorbance))
@@ -44,3 +44,11 @@ class Calibration():
         """
         """
         return k * x
+
+    def get_wavelength_from_user(points):
+        """
+        """
+        plotter = Plotter() # TODO: import Plotter
+        plotter.plot_raw_calibration(points) # TODO: def method
+        wavelength = input('Wavelength to use for calibration and concentration calculation: ')
+        return float(wavelength)

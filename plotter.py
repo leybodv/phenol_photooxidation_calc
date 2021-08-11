@@ -40,7 +40,7 @@ class Plotter():
         ax.legend()
         return ax
 
-    def plot_raw_calibration(points):
+    def plot_raw_calibration(self, points):
         """
         """
         print(f'Plotter().plot_raw_calibration(points):') #LOG

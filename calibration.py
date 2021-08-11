@@ -16,7 +16,7 @@ class Calibration():
         self.solvent = solvent
         self.calibration_points = self.parse_calibration_data(folder)
         self.calibration_wavelength = self.get_wavelength_from_user(self.calibration_points)
-        self.calibration_coefficient = self.find_calibration_coefficient(calibration_wavelength, self.calibration_points)
+        self.calibration_coefficient = self.find_calibration_coefficient(self.calibration_wavelength, self.calibration_points)
 
     def parse_calibration_data(self, folder):
         """
@@ -51,5 +51,5 @@ class Calibration():
         """
         plotter = Plotter()
         plotter.plot_raw_calibration(points)
-        wavelength = input('Wavelength to use for calibration and concentration calculation: ')
+        wavelength = input('Wavelength to use for calibration and concentration calculation [nm]: ')
         return float(wavelength)

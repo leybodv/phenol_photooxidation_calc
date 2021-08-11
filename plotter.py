@@ -4,6 +4,7 @@ import math
 import matplotlib.pyplot as plt
 from experiment import Experiment
 from datapoint import DataPoint
+from calibrationpoint import CalibrationPoint
 
 class Plotter():
 
@@ -38,3 +39,13 @@ class Plotter():
             print(f'{ax.get_children()[-1].get_label() = }') #LOG
         ax.legend()
         return ax
+
+    def plot_raw_calibration(points):
+        """
+        """
+        print(f'Plotter().plot_raw_calibration(points):') #LOG
+        fig, ax = plt.subplots()
+        for point in points:
+            ax.plot(point.wavelength, point.absorbance, label=point.concentration)
+        ax.legend()
+        plt.show(block=False)

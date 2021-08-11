@@ -17,6 +17,8 @@ class Calibration():
         self.calibration_points = self.parse_calibration_data(folder)
         self.calibration_wavelength = self.get_wavelength_from_user(self.calibration_points)
         self.calibration_coefficient = self.find_calibration_coefficient(self.calibration_wavelength, self.calibration_points)
+        plotter = Plotter()
+        plotter.plot_calibration(self) # TODO: add method to Plotter()
 
     def parse_calibration_data(self, folder):
         """

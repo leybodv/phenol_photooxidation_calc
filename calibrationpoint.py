@@ -1,5 +1,7 @@
 # TODO: docs
 
+import numpy as np
+
 class CalibrationPoint():
 
     def __init__(self, concentration, wavelength, absorbance):
@@ -7,8 +9,8 @@ class CalibrationPoint():
         """
         print(f'CalibrationPoint().__init__(self, concentration, wavelength, absorbance):') #LOG
         self.concentration = concentration
-        self.wavelength = wavelength
-        self.absorbance = absorbance
+        self.wavelength = np.array(wavelength)
+        self.absorbance = np.array(absorbance)
 
     def get_absorbance_at(self, wavelength):
         """
@@ -17,6 +19,7 @@ class CalibrationPoint():
         print(f'{self.concentration = }') #LOG
         print(f'{self.absorbance = }') #LOG
         print(f'{self.wavelength = }') #LOG
-        print(f'{self.absorbance[self.wavelength == wavelength] = }') #LOG
+        print(f'{self.wavelength == wavelength = }') #LOG
+        print(f'{type(wavelength) = }') #LOG
         absorbance = self.absorbance[self.wavelength == wavelength][0]
         return absorbance

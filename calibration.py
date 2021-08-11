@@ -3,6 +3,7 @@
 from pathlib import Path
 from uvvisparser import UvVisParser
 from calibrationpoint import CalibrationPoint
+from plotter import Plotter
 import scipy.optimize as spopt
 
 class Calibration():
@@ -48,7 +49,7 @@ class Calibration():
     def get_wavelength_from_user(points):
         """
         """
-        plotter = Plotter() # TODO: import Plotter
-        plotter.plot_raw_calibration(points) # TODO: def method
+        plotter = Plotter()
+        plotter.plot_raw_calibration(points)
         wavelength = input('Wavelength to use for calibration and concentration calculation: ')
         return float(wavelength)

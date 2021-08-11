@@ -35,7 +35,7 @@ class PhPhOxCalcShell(cmd.Cmd):
         """
         print(f'PhPhOxCalcShell().do_addcalibraion(self, arg):') #LOG
         arguments = self.parse_args(arg)
-        self.calibrations.append(Calibration(solute=arguments['solute'], solvent=arguments['solvent'], calibration_folder=arguments['folder'])) # TODO: remove calibration wavelength parameter from class initialization
+        self.calibrations.append(Calibration(solute=arguments['solute'], solvent=arguments['solvent'], folder=arguments['folder']))
 
     def do_plotrawdata(self, arg):
         """

@@ -15,7 +15,7 @@ class Calibration():
         self.solvent = solvent
         self.calibration_wavelength = calibration_wavelength
         self.calibration_points = self.parse_calibration_data(calibration_folder)
-        self.calibration_coefficient = self.find_calibration_coefficient(calibration_wavelength, calibration_points)
+        self.calibration_coefficient = self.find_calibration_coefficient(calibration_wavelength, self.calibration_points)
 
     def parse_calibration_data(self, calibration_folder):
         """

@@ -46,7 +46,7 @@ class Calibration():
         """
         return k * x
 
-    def get_wavelength_from_user(points):
+    def get_wavelength_from_user(self, points):
         """
         """
         plotter = Plotter()

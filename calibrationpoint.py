@@ -14,5 +14,6 @@ class CalibrationPoint():
         """
         """
         print(f'CalibrationPoint().get_absorbance_at(self, wavelength):') #LOG
+        print(f'{self.absorbance[self.wavelength == wavelength]}') #LOG
         absorbance = self.absorbance[self.wavelength == wavelength][0]
         return absorbance

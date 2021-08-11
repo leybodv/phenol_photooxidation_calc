@@ -22,7 +22,7 @@ class Calibration():
         """
         print(f'parse_calibration_data(self, calibration_folder):') #LOG
         calibration_points = list()
-        for file in Path(calibration_folder):
+        for file in Path(calibration_folder).iterdir():
             if file.is_file():
                 concentration, wavelength, absorbance = UvVisParser().parse_calibration_from_file(file)
                 calibration_points.append(CalibrationPoint(concentration, wavelength, absorbance))

@@ -45,6 +45,13 @@ class PhPhOxCalcShell(cmd.Cmd):
             return
         Plotter().plotrawdata(self.experiments)
 
+    def do_execute(self, arg):
+        """
+        """
+        print('PhPhOxCalcShell().doexecute(self, arg):') #LOG
+        with open(arg) as f:
+            self.cmdqueue.extend(f.read().splitlines())
+
     def do_quit(self, arg):
         """
         Quits program

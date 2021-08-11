@@ -5,6 +5,7 @@
 import cmd
 from experiment import Experiment
 from plotter import Plotter
+from calibration import Calibration
 
 class PhPhOxCalcShell(cmd.Cmd):
     intro = 'Process data of phenol photooxidation experiment. Type help or ? to list commands.\n'

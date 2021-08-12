@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 # TODO: docs
+# TODO: plot experiment after adding automatically
 
 import cmd
 from experiment import Experiment

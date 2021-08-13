@@ -45,6 +45,7 @@ class PhPhOxCalcShell(cmd.Cmd):
         print(f'PhPhOxCalcShell().do_processexperiments(self, arg)') #LOG
         for experiment in self.experiments:
             results.append(Result(experiment, calibrations)) # TODO: define class
+        Plotter().plot_results(results) #TODO: define method
 
     def do_plotrawdata(self, arg):
         """

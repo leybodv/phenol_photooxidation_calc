@@ -25,3 +25,8 @@ class ResultPoint():
             reference_spectra.append(calibration.get_spectrum_by_concentration(concentration)) # TODO: add method to Calibration
             reference_names.append(calibration.solute)
         return (reference_spectra, reference_names)
+
+    def find_coefficients(self, spectrum, reference_spectra):
+        """
+        """
+        print(f'ResultPoint().find_coefficients(self, spectrum, reference_spectra):') #LOG

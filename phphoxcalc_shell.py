@@ -13,6 +13,7 @@ class PhPhOxCalcShell(cmd.Cmd):
     prompt = '> '
     experiments = list() #experiment space
     calibrations = list() #calibrations space
+    results = list()
 
     def do_addexperiment(self, arg):
         """
@@ -37,6 +38,13 @@ class PhPhOxCalcShell(cmd.Cmd):
         print(f'PhPhOxCalcShell().do_addcalibraion(self, arg):') #LOG
         arguments = self.parse_args(arg)
         self.calibrations.append(Calibration(solute=arguments['solute'], solvent=arguments['solvent'], folder=arguments['folder']))
+
+    def do_processexperiments(self, arg):
+        """
+        """
+        print(f'PhPhOxCalcShell().do_processexperiments(self, arg)') #LOG
+        for experiment in self.experiments:
+            results.append(Result(experiment, calibrations)) # TODO: define class
 
     def do_plotrawdata(self, arg):
         """

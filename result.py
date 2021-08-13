@@ -17,5 +17,5 @@ class Result():
         print(f'Result().calculate_results(self, raw_data_points, calibrations)') #LOG
         result_points = list()
         for point in raw_data_points:
-            result_points.append(ResultPoint(point, calibrations)) # TODO: define class
+            result_points.append(ResultPoint(point, calibrations))
         return result_points

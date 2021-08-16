@@ -36,6 +36,7 @@ class ResultPoint():
     def get_fitted_y(x:float, reference_spectra:list, coefficients:list):
         """
         """
+        print(f'ResultPoint().get_fitted_y(x, reference_spectra, coefficients):') #LOG
         ys = list()
         for spectrum in reference_spectra:
             ys.append(spectrum.get_absorbance_at(x)) # TODO: define method in Spectrum class

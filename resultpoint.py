@@ -4,7 +4,7 @@ from experiment import Experiment
 
 class ResultPoint():
 
-    def __init__(self, experimental_point, calibrations):
+    def __init__(self, experimental_point:DataPoint, calibrations:list):
         """
         """
         print(f'ResultPoint().__init__(self, experimental_point, calibrations):') #LOG
@@ -13,7 +13,7 @@ class ResultPoint():
         self.coefficients = self.find_coefficients(experimental_point.spectrum, self.reference_spectra) # TODO: add spectrum instance variable to Experiment; define method
         self.concentrations = self.find_concentrations(self.coefficients, self.reference_spectra, calibrations) # TODO: define method
 
-    def find_out_spectra(self, calibrations):
+    def find_out_spectra(self, calibrations:list):
         """
         """
         print(f'ResultPoint().find_out_spectra(self, calibrations):') #LOG
@@ -26,7 +26,7 @@ class ResultPoint():
             reference_names.append(calibration.solute)
         return (reference_spectra, reference_names)
 
-    def find_coefficients(self, spectrum, reference_spectra):
+    def find_coefficients(self, spectrum:Spectrum, reference_spectra:list): # TODO: define Spectrum class
         """
         """
         print(f'ResultPoint().find_coefficients(self, spectrum, reference_spectra):') #LOG

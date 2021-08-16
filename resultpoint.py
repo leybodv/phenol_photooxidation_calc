@@ -30,3 +30,5 @@ class ResultPoint():
         """
         """
         print(f'ResultPoint().find_coefficients(self, spectrum, reference_spectra):') #LOG
+        popt, pcov = spopt.curve_fit(self.get_fitted_y, spectrum.wavelength, spectrum.absorbance) # TODO: define method get_fitted_y, add wavelength and absorbance instance variables to Spectrum class
+        return popt

@@ -7,6 +7,7 @@ import cmd
 from experiment import Experiment
 from plotter import Plotter
 from calibration import Calibration
+from result import Result
 
 class PhPhOxCalcShell(cmd.Cmd):
     intro = 'Process data of phenol photooxidation experiment. Type help or ? to list commands.\n'
@@ -44,8 +45,8 @@ class PhPhOxCalcShell(cmd.Cmd):
         """
         print(f'PhPhOxCalcShell().do_processexperiments(self, arg)') #LOG
         for experiment in self.experiments:
-            results.append(Result(experiment, calibrations))
-        Plotter().plot_results(results)
+            self.results.append(Result(experiment, self.calibrations))
+        Plotter().plot_results(self.results)
 
     def do_plotrawdata(self, arg):
         """

@@ -87,7 +87,7 @@ class Plotter():
                 for col in range(cols):
                     if not bool(rests_copy):
                         break
-                    self.plotresults(axs[row,col], rests_copy.pop(0))
+                    self.plotresult(axs[row,col], rests_copy.pop(0))
         plt.show(block=False)
 
     def plotresult(self, ax:Axes, result:Result) -> Axes:

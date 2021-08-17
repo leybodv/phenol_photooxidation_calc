@@ -1,5 +1,4 @@
 # TODO: docs
-# TODO: check imports
 
 from plotter import Plotter
 from calibration import Calibration

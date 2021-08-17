@@ -1,10 +1,12 @@
 # TODO: docs
 # TODO: check imports
 
-from experiment import Experiment
 from plotter import Plotter
 from calibration import Calibration
+from datapoint import DataPoint
+from spectrum import Spectrum
 import numpy as np
+import scipy.optimization as spopt
 
 class ResultPoint():
 
@@ -52,7 +54,7 @@ class ResultPoint():
         print(f'ResultPoint().find_concentrations(self, coefficients, reference_spectra, calibrations):') #LOG
         concentrations = list()
         for coefficient, spectrum, calibration in zip(coefficients, reference_spectra, calibrations):
-            corrected_spectrum = Spectrum(wavelength=spectrum.wavelength, absorbance=spectrum.absorbance*coefficient)
+            corrected_spectrum = Spectrum(wavelength=spectrum.get_wavelength(), absorbance=spectrum.get_absorbance()*coefficient)
             calibration_absorbance = corrected_spectrum.get_absorbance_at(calibration.calibration_wavelength)
             concentrations.append(calibration_absorbance / calibration.calibration_coefficient)
-        return np.array(calibrations) # TODO: import numpy
+        return np.array(calibrations)

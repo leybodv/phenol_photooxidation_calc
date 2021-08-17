@@ -26,7 +26,7 @@ class Plotter():
                     if not bool(exps_copy):
                         break
                     self.plotrawexperiment(axs[row,col], exps_copy.pop(0))
-        plt.show()
+        plt.show(block=False)
 
     def plotrawexperiment(self, ax, experiment):
         """
@@ -68,3 +68,39 @@ class Plotter():
         ax_calibration.plot(calibration_x, calibration_y_calc, c='blue')
         ax_uvvis.legend()
         plt.show(block=False)
+
+    def plot_results(self, results:list): #TODO import Results
+        """
+        """
+        print(f'Plotter().plot_results(self, results):') #LOG
+        if len(results) == 1:
+            fig, ax = plt.subplots()
+            self.plotresult(ax, results[0]) #TODO define method
+        else:
+            rests_copy = results.copy()
+            cols = math.ceil(math.sqrt(len(results)))
+            rows = math.ceil(len(results) / cols)
+            fig, axs = plt.subplots(nrows=rows, ncols=cols)
+            for row in range(rows):
+                for col in range(cols):
+                    if not bool(rests_copy):
+                        break
+                    self.plotresults(axs[row,col], rests_copy.pop(0))
+        plt.show(block=False)
+
+    def plotresult(self, ax:Axes, result:Result) -> Axes:
+        """
+        """
+        print(f'Plotter().plotresult(self, ax, result)') #LOG
+        ax.set_title(result.get_name()) # TODO def method
+        points_dict = {}
+        for point in result.get_points(): #TODO def method
+            for name, concentration in zip(point.get_reference_names(), point.get_concentrations()): #TODO def method
+                if name not in points_dict:
+                    points_dict[name] = (list(), list())
+            points_dict[name][0].append(point.get_time()) # TODO def method
+            points_dict[name][1].append(concentration)
+        for name in points_dict:
+            ax.plot(points_dict[name][0], points_dict[name][1], label=name)
+        ax.legend()
+        return ax

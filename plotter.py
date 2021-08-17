@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 from experiment import Experiment
 from datapoint import DataPoint
 from calibrationpoint import CalibrationPoint
+from result import Result
+from resultpoint import ResultPoint
 
 class Plotter():
 
@@ -69,13 +71,13 @@ class Plotter():
         ax_uvvis.legend()
         plt.show(block=False)
 
-    def plot_results(self, results:list): #TODO import Results
+    def plot_results(self, results:list):
         """
         """
         print(f'Plotter().plot_results(self, results):') #LOG
         if len(results) == 1:
             fig, ax = plt.subplots()
-            self.plotresult(ax, results[0]) #TODO define method
+            self.plotresult(ax, results[0])
         else:
             rests_copy = results.copy()
             cols = math.ceil(math.sqrt(len(results)))
@@ -92,9 +94,9 @@ class Plotter():
         """
         """
         print(f'Plotter().plotresult(self, ax, result)') #LOG
-        ax.set_title(result.get_name()) # TODO def method
+        ax.set_title(result.get_name())
         points_dict = {}
-        for point in result.get_points(): #TODO def method
+        for point in result.get_points():
             for name, concentration in zip(point.get_reference_names(), point.get_concentrations()): #TODO def method
                 if name not in points_dict:
                     points_dict[name] = (list(), list())

@@ -55,3 +55,13 @@ class Calibration():
         plotter.plot_raw_calibration(points)
         wavelength = input('Wavelength to use for calibration and concentration calculation [nm]: ')
         return float(wavelength)
+
+    def get_spectrum_by_concentration(self, concentration:float) -> Spectrum:
+        """
+        """
+        print(f'Calibration().get_spectrum_by_concentration(self, concentration)') #LOG
+        spectrum = None
+        for point in self.calibration_points:
+            if point.get_concentration() == concentration: #TODO: define method
+                spectrum = point.get_spectrum() #TODO define method
+        return spectrum

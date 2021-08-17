@@ -4,6 +4,7 @@
 from experiment import Experiment
 from plotter import Plotter
 from calibration import Calibration
+import numpy as np
 
 class ResultPoint():
 
@@ -42,8 +43,8 @@ class ResultPoint():
         print(f'ResultPoint().get_fitted_y(self, x, reference_spectra, coefficients):') #LOG
         ys = list()
         for spectrum in reference_spectra:
-            ys.append(spectrum.get_absorbance_at(x)) # TODO: define method in Spectrum class
-        y = np.sum(np.array(ys) * np.array(coefficients)) # TODO: import numpy
+            ys.append(spectrum.get_absorbance_at(x))
+        y = np.sum(np.array(ys) * np.array(coefficients))
 
     def find_concentrations(self, coefficients:array, reference_spectra:list, calibrations:list) -> array:
         """

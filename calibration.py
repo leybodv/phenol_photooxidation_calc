@@ -62,6 +62,6 @@ class Calibration():
         print(f'Calibration().get_spectrum_by_concentration(self, concentration)') #LOG
         spectrum = None
         for point in self.calibration_points:
-            if point.get_concentration() == concentration: #TODO: define method
-                spectrum = point.get_spectrum() #TODO define method
+            if point.get_concentration() == concentration:
+                spectrum = point.get_spectrum()
         return spectrum

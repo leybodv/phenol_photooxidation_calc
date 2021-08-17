@@ -2,6 +2,8 @@
 # TODO: check imports
 
 from experiment import Experiment
+from plotter import Plotter
+from calibration import Calibration
 
 class ResultPoint():
 
@@ -21,7 +23,7 @@ class ResultPoint():
         reference_spectra = list()
         reference_names = list()
         for calibration in calibrations:
-            Plotter().plot_raw_calibration(calibration.calibration_points) #TODO: import Plotter, Calibration
+            Plotter().plot_raw_calibration(calibration.calibration_points)
             concentration = input('which spectrum to use for fitting data? enter concentration: ')
             reference_spectra.append(calibration.get_spectrum_by_concentration(concentration)) # TODO: add method to Calibration
             reference_names.append(calibration.solute)

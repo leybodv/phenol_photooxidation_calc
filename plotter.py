@@ -97,10 +97,10 @@ class Plotter():
         ax.set_title(result.get_name())
         points_dict = {}
         for point in result.get_points():
-            for name, concentration in zip(point.get_reference_names(), point.get_concentrations()): #TODO def method
+            for name, concentration in zip(point.get_reference_names(), point.get_concentrations()):
                 if name not in points_dict:
                     points_dict[name] = (list(), list())
-            points_dict[name][0].append(point.get_time()) # TODO def method
+            points_dict[name][0].append(point.get_time())
             points_dict[name][1].append(concentration)
         for name in points_dict:
             ax.plot(points_dict[name][0], points_dict[name][1], label=name)

@@ -57,3 +57,21 @@ class ResultPoint():
             calibration_absorbance = corrected_spectrum.get_absorbance_at(calibration.calibration_wavelength)
             concentrations.append(calibration_absorbance / calibration.calibration_coefficient)
         return np.array(calibrations)
+
+    def get_reference_names(self) -> list:
+        """
+        """
+        print(f'ResultPoint().get_reference_names(self):') #LOG
+        return self.reference_names
+
+    def get_time(self) -> float:
+        """
+        """
+        print(f'ResultPoint().get_time(self):') #LOG
+        return self.time
+
+    def get_concentrations(self) -> array:
+        """
+        """
+        print(f'ResultPoint().get_concentrations(self):') #LOG
+        return self.concentrations

@@ -1,5 +1,4 @@
 # TODO: docs
-# TODO: check access to calibraionpoint.wavelength and calibrationpoint.absorbance variables
 
 from spectrum import Spectrum
 

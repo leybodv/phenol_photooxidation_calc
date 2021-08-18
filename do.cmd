@@ -5,3 +5,4 @@ addcalibration solute=hydroquinone solvent=water folder=/home/d/git/phenol_photo
 addcalibration solute=phenol solvent=water folder=/home/d/git/phenol_photooxidation_calc/calibrations/phenol
 addexperiment sample_name=dl100 raw_data_path=/home/d/git/phenol_photooxidation_calc/test/dl100_uv-vis_phenol.dat
 plotrawdata
+processexperiments verbose=True

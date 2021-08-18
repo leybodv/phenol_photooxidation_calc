@@ -23,7 +23,7 @@ class Spectrum():
         """
         """
         print(f'Spectrum().get_absorbance(self):') #LOG
-        return self absorbance
+        return self.absorbance
 
     def get_absorbance_at(self, wavelength:float) -> float:
         """

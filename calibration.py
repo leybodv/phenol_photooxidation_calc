@@ -4,6 +4,7 @@ from pathlib import Path
 from uvvisparser import UvVisParser
 from calibrationpoint import CalibrationPoint
 from plotter import Plotter
+from spectrum import Spectrum
 import scipy.optimize as spopt
 
 class Calibration():

@@ -2,6 +2,7 @@
 
 from experiment import Experiment
 from resultpoint import ResultPoint
+from plotter import Plotter
 
 class Result():
 
@@ -18,7 +19,10 @@ class Result():
         print(f'Result().calculate_results(self, raw_data_points, calibrations)') #LOG
         result_points = list()
         for point in raw_data_points:
-            result_points.append(ResultPoint(point, calibrations, verbose))
+            resultpoint = ResultPoint(point, calibrations)
+            result_points.append(resultpoint)
+            if verbose:
+                Plotter().plot_result_point(resultpoint)
         return result_points
 
     def get_name(self) -> str:

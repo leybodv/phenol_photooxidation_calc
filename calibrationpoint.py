@@ -1,6 +1,7 @@
 # TODO: docs
 
 from spectrum import Spectrum
+import numpy as np
 
 class CalibrationPoint():
 
@@ -15,25 +16,20 @@ class CalibrationPoint():
         """
         """
         print(f'CalibrationPoint().get_absorbance_at(self, wavelength):') #LOG
-#        print(f'{self.concentration = }') #LOG
-#        print(f'{self.absorbance = }') #LOG
-#        print(f'{self.wavelength = }') #LOG
-#        print(f'{self.wavelength == wavelength = }') #LOG
-#        print(f'{type(wavelength) = }') #LOG
-        absorbance = self.absorbance[self.wavelength == wavelength][0]
+        absorbance = self.spectrum.get_absorbance_at(wavelength)
         return absorbance
 
-    def get_wavelengths(self) -> array:
+    def get_wavelength(self) -> np.ndarray:
         """
         """
-        print(f'CalibrationPoint().get_wavelengths(self):') #LOG
-        return self.spectrum.get_wavelengths() # TODO: define method
+        print(f'CalibrationPoint().get_wavelength(self):') #LOG
+        return self.spectrum.get_wavelength() # TODO: define method
 
-    def get_absorbances(self) -> array:
+    def get_absorbance(self) -> np.ndarray:
         """
         """
-        print(f'CalibrationPoint().get_absorbances(self):') #LOG
-        return self.spectrum.get_absorbances() # TODO: define method
+        print(f'CalibrationPoint().get_absorbance(self):') #LOG
+        return self.spectrum.get_absorbance()
 
     def get_concentration(self) -> float:
         """

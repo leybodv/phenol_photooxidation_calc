@@ -22,7 +22,7 @@ class Result():
             resultpoint = ResultPoint(point, calibrations)
             result_points.append(resultpoint)
             if verbose:
-                Plotter().plot_result_point(resultpoint)
+                Plotter().plot_result_point(point, resultpoint)
         return result_points
 
     def get_name(self) -> str:

@@ -2,9 +2,9 @@
 
 import math
 import matplotlib.pyplot as plt
-from experiment import Experiment
+#from experiment import Experiment
 from datapoint import DataPoint
-from calibrationpoint import CalibrationPoint
+#from calibrationpoint import CalibrationPoint
 from result import Result
 from resultpoint import ResultPoint
 
@@ -90,7 +90,7 @@ class Plotter():
                     self.plotresult(axs[row,col], rests_copy.pop(0))
         plt.show(block=False)
 
-    def plotresult(self, ax:Axes, result:Result) -> Axes:
+    def plotresult(self, ax:plt.Axes, result:Result) -> plt.Axes:
         """
         """
         print(f'Plotter().plotresult(self, ax, result)') #LOG
@@ -106,3 +106,14 @@ class Plotter():
             ax.plot(points_dict[name][0], points_dict[name][1], label=name)
         ax.legend()
         return ax
+
+    def plot_result_point(self, datapoint:DataPoint, resultpoint:ResultPoint):
+        """
+        """
+        print(f'Plotter().plot_result_point(self, point)') #LOG
+        ax, fig = plt.subplots()
+        ax.plot(datapoint.get_wavelength(), datapoint.get_absorbance(), label='raw data')
+        for reference_name, corrected_reference_spectrum in zip(resultpoint.get_reference_names(), resultpoint.get_corrected_reference_spectra()):
+            ax.plot(corrected_reference_spectrum.get_wavelength(), corrected_reference_spectrum.get_absorbance(), linestyle='--', label=reference_name)
+        ax.legend()
+        plt.show(block=False)

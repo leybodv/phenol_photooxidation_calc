@@ -2,9 +2,7 @@
 
 import math
 import matplotlib.pyplot as plt
-#from experiment import Experiment
 from datapoint import DataPoint
-#from calibrationpoint import CalibrationPoint
 from result import Result
 from resultpoint import ResultPoint
 

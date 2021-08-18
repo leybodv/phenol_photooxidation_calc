@@ -13,13 +13,13 @@ class Spectrum():
         self.wavelength = np.array(wavelength)
         self.absorbance = np.array(absorbance)
 
-    def get_wavelength(self) -> array:
+    def get_wavelength(self) -> np.ndarray:
         """
         """
         print(f'Spectrum().get_wavelength():') #LOG
         return self.wavelength
 
-    def get_absorbance(self) -> array:
+    def get_absorbance(self) -> np.ndarray:
         """
         """
         print(f'Spectrum().get_absorbance(self):') #LOG

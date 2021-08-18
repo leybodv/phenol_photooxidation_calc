@@ -76,3 +76,12 @@ class ResultPoint():
         """
         print(f'ResultPoint().get_concentrations(self):') #LOG
         return self.concentrations
+
+    def get_corrected_reference_spectra(self) -> list:
+        """
+        """
+        print(f'ResultPoint().get_corrected_reference_spectra(self):') #LOG
+        corrected_spectra = list()
+        for spectrum, coefficient in zip(self.reference_spectra, self.coefficients):
+            corrected_spectra.append(Spectrum(wavelength=spectrum.get_wavelength(), absorbance=spectrum.get_absorbance() * coefficient))
+        return corrected_spectra

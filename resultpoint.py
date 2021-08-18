@@ -5,7 +5,7 @@ from calibration import Calibration
 from datapoint import DataPoint
 from spectrum import Spectrum
 import numpy as np
-import scipy.optimization as spopt
+import scipy.optimize as spopt
 
 class ResultPoint():
 
@@ -31,14 +31,14 @@ class ResultPoint():
             reference_names.append(calibration.solute)
         return (reference_spectra, reference_names)
 
-    def find_coefficients(self, spectrum:Spectrum, reference_spectra:list) -> array:
+    def find_coefficients(self, spectrum:Spectrum, reference_spectra:list) -> np.ndarray:
         """
         """
         print(f'ResultPoint().find_coefficients(self, spectrum, reference_spectra):') #LOG
-        popt, pcov = spopt.curve_fit(lambda x, params*: self.get_fitted_y(x, reference_spectra, params), spectrum.get_wavelength(), spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 1))
+        popt, pcov = spopt.curve_fit(lambda x, *params: self.get_fitted_y(x, reference_spectra, params), spectrum.get_wavelength(), spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 1))
         return popt
 
-    def get_fitted_y(self, x:float, reference_spectra:list, coefficients:list) -> float:
+    def get_fitted_y(self, x:float, reference_spectra:list, coefficients:tuple) -> float:
         """
         """
         print(f'ResultPoint().get_fitted_y(self, x, reference_spectra, coefficients):') #LOG
@@ -46,8 +46,9 @@ class ResultPoint():
         for spectrum in reference_spectra:
             ys.append(spectrum.get_absorbance_at(x))
         y = np.sum(np.array(ys) * np.array(coefficients))
+        return y
 
-    def find_concentrations(self, coefficients:array, reference_spectra:list, calibrations:list) -> array:
+    def find_concentrations(self, coefficients:np.ndarray, reference_spectra:list, calibrations:list) -> np.ndarray:
         """
         """
         print(f'ResultPoint().find_concentrations(self, coefficients, reference_spectra, calibrations):') #LOG
@@ -70,7 +71,7 @@ class ResultPoint():
         print(f'ResultPoint().get_time(self):') #LOG
         return self.time
 
-    def get_concentrations(self) -> array:
+    def get_concentrations(self) -> np.ndarray:
         """
         """
         print(f'ResultPoint().get_concentrations(self):') #LOG

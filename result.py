@@ -1,23 +1,24 @@
 # TODO: docs
 
 from experiment import Experiment
+from resultpoint import ResultPoint
 
 class Result():
 
-    def __init__(self, experiment:Experiment, calibrations:list):
+    def __init__(self, experiment:Experiment, calibrations:list, verbose=False):
         """
         """
         print(f'Result().__init__(self, experiment, calibrations)') #LOG
         self.sample_name = experiment.sample_name
-        self.result_points = self.calculate_results(experiment.data_points, calibrations)
+        self.result_points = self.calculate_results(experiment.data_points, calibrations, verbose)
 
-    def calculate_results(self, raw_data_points:list, calibrations:list):
+    def calculate_results(self, raw_data_points:list, calibrations:list, verbose:bool):
         """
         """
         print(f'Result().calculate_results(self, raw_data_points, calibrations)') #LOG
         result_points = list()
         for point in raw_data_points:
-            result_points.append(ResultPoint(point, calibrations))
+            result_points.append(ResultPoint(point, calibrations, verbose))
         return result_points
 
     def get_name(self) -> str:

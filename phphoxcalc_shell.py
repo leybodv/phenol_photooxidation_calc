@@ -44,8 +44,9 @@ class PhPhOxCalcShell(cmd.Cmd):
         """
         """
         print(f'PhPhOxCalcShell().do_processexperiments(self, arg)') #LOG
+        arguments = self.parse_args(arg)
         for experiment in self.experiments:
-            self.results.append(Result(experiment, self.calibrations))
+            self.results.append(Result(experiment, self.calibrations, verbose=(arguments["verbose"] == "True")))
         Plotter().plot_results(self.results)
 
     def do_plotrawdata(self, arg):

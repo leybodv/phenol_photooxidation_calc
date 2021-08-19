@@ -22,6 +22,12 @@ class Calibration():
         plotter = Plotter()
         plotter.plot_calibration(self)
 
+    def get_solute(self) -> str:
+        """
+        """
+        print(f'Calibration().get_solute(self):') #LOG
+        return self.solute
+
     def parse_calibration_data(self, folder):
         """
         """

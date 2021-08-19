@@ -26,10 +26,10 @@ class ResultPoint():
         reference_spectra = list()
         reference_names = list()
         for calibration in calibrations:
-            Plotter().plot_raw_calibration(calibration.calibration_points)
+            Plotter().plot_raw_calibration(calibration.calibration_points, calibration.get_solute())
             concentration = input('which spectrum to use for fitting data? enter concentration: ')
             reference_spectra.append(calibration.get_spectrum_by_concentration(concentration))
-            reference_names.append(calibration.solute)
+            reference_names.append(calibration.get_solute())
         return (reference_spectra, reference_names)
 
     def find_coefficients(self, spectrum:Spectrum, reference_spectra:list) -> np.ndarray:

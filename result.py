@@ -2,7 +2,6 @@
 
 from experiment import Experiment
 from resultpoint import ResultPoint
-#from plotter import Plotter
 
 class Result():
 

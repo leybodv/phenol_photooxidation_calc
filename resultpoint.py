@@ -67,7 +67,7 @@ class ResultPoint():
             corrected_spectrum = Spectrum(wavelength=spectrum.get_wavelength(), absorbance=spectrum.get_absorbance()*coefficient)
             calibration_absorbance = corrected_spectrum.get_absorbance_at(calibration.calibration_wavelength)
             concentrations.append(calibration_absorbance / calibration.calibration_coefficient)
-        return np.array(calibrations)
+        return np.array(concentrations)
 
     def get_reference_names(self) -> list:
         """

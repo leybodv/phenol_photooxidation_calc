@@ -64,7 +64,7 @@ class PhPhOxCalcShell(cmd.Cmd):
         with open(arg) as f:
             for line in f:
                 if not line.startswith('#'):
-                    self.cmdqueue.extend(line)
+                    self.cmdqueue.append(line)
 
     def do_quit(self, arg):
         """

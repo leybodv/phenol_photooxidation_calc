@@ -65,7 +65,7 @@ class Calibration():
         """
         from plotter import Plotter
         plotter = Plotter()
-        plotter.plot_raw_calibration(points)
+        plotter.plot_raw_calibration(points, self.get_solute())
         wavelength = input('Wavelength to use for calibration and concentration calculation [nm]: ')
         return float(wavelength)
 

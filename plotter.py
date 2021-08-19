@@ -2,6 +2,7 @@
 
 import math
 import matplotlib.pyplot as plt
+import numpy as np
 from datapoint import DataPoint
 from result import Result
 from resultpoint import ResultPoint
@@ -112,7 +113,10 @@ class Plotter():
         print(f'Plotter().plot_result_point(self, point)') #LOG
         fig, ax = plt.subplots()
         ax.plot(datapoint.get_wavelength(), datapoint.get_absorbance(), label='raw data')
+        sum_absorbance = np.full(len(datapoint.get_absorbance()), 0)
         for reference_name, corrected_reference_spectrum in zip(resultpoint.get_reference_names(), resultpoint.get_corrected_reference_spectra()):
             ax.plot(corrected_reference_spectrum.get_wavelength(), corrected_reference_spectrum.get_absorbance(), linestyle='--', label=reference_name)
+            sum_absorbance = sum_absorbance + corrected_reference_spectrum.get_absorbance()
+        ax.plot(datapoint.get_wavelength(), sum_absorbance, label='sum')
         ax.legend()
         plt.show(block=False)

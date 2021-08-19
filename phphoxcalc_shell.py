@@ -62,7 +62,9 @@ class PhPhOxCalcShell(cmd.Cmd):
         """
         print('PhPhOxCalcShell().doexecute(self, arg):') #LOG
         with open(arg) as f:
-            self.cmdqueue.extend(f.read().splitlines())
+            for line in f:
+                if not line.startswith('#'):
+                    self.cmdqueue.extend(line)
 
     def do_quit(self, arg):
         """

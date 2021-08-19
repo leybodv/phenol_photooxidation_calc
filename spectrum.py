@@ -29,4 +29,4 @@ class Spectrum():
         """
         """
         print(f'Spectrum().get_absorbance(self, wavelength):') #LOG
-        return self.absorbance[self.wavelength == wavelength]
+        return self.absorbance[self.wavelength == wavelength][0]

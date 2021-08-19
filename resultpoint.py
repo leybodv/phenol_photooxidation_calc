@@ -1,6 +1,6 @@
 # TODO: docs
 
-from plotter import Plotter
+#from plotter import Plotter
 from calibration import Calibration
 from datapoint import DataPoint
 from spectrum import Spectrum
@@ -22,6 +22,7 @@ class ResultPoint():
         """
         """
         print(f'ResultPoint().find_out_spectra(self, calibrations):') #LOG
+        from plotter import Plotter
         reference_spectra = list()
         reference_names = list()
         for calibration in calibrations:

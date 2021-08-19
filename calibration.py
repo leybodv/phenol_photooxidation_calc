@@ -3,7 +3,7 @@
 from pathlib import Path
 from uvvisparser import UvVisParser
 from calibrationpoint import CalibrationPoint
-from plotter import Plotter
+#from plotter import Plotter
 from spectrum import Spectrum
 import scipy.optimize as spopt
 
@@ -12,6 +12,7 @@ class Calibration():
     def __init__(self, solute, solvent, folder):
         """
         """
+        from plotter import Plotter
         print(f'__init__(self, solute, solvent, folder):') #LOG
         self.solute = solute
         self.solvent = solvent
@@ -41,6 +42,10 @@ class Calibration():
         for calibration_point in calibration_points:
             absorbances.append(calibration_point.get_absorbance_at(calibration_wavelength))
             concentrations.append(calibration_point.concentration)
+        print(f'{concentrations = }') #LOG
+        print(f'{absorbances = }') #LOG
+        print(f'{type(concentrations[0]) = }') #LOG
+        print(f'{type(absorbances[0]) = }') #LOG
         popt, pcov = spopt.curve_fit(self.linear_func, concentrations, absorbances)
         return popt[0]
 
@@ -52,6 +57,7 @@ class Calibration():
     def get_wavelength_from_user(self, points):
         """
         """
+        from plotter import Plotter
         plotter = Plotter()
         plotter.plot_raw_calibration(points)
         wavelength = input('Wavelength to use for calibration and concentration calculation [nm]: ')

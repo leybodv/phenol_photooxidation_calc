@@ -46,7 +46,7 @@ class Plotter():
         print(f'Plotter().plot_raw_calibration(points):') #LOG
         fig, ax = plt.subplots()
         for point in points:
-            ax.plot(point.wavelength, point.absorbance, label=point.concentration)
+            ax.plot(point.get_wavelength(), point.get_absorbance(), label=point.get_concentration())
         ax.legend()
         plt.show(block=False)
 

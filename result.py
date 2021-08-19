@@ -2,7 +2,7 @@
 
 from experiment import Experiment
 from resultpoint import ResultPoint
-from plotter import Plotter
+#from plotter import Plotter
 
 class Result():
 
@@ -17,6 +17,7 @@ class Result():
         """
         """
         print(f'Result().calculate_results(self, raw_data_points, calibrations)') #LOG
+        from plotter import Plotter
         result_points = list()
         for point in raw_data_points:
             resultpoint = ResultPoint(point, calibrations)

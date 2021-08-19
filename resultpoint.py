@@ -20,21 +20,6 @@ class ResultPoint():
         self.coefficients = self.find_coefficients(experimental_point.spectrum, self.reference_spectra)
         self.concentrations = self.find_concentrations(self.coefficients, self.reference_spectra, calibration_coefficients, calibration_wavelengths)
 
-    def find_out_spectra(self, calibrations:list) -> tuple:
-        """
-        """
-        print(f'ResultPoint().find_out_spectra(self, calibrations):') #LOG
-        from plotter import Plotter
-        reference_spectra = list()
-        reference_names = list()
-        for calibration in calibrations:
-            Plotter().plot_raw_calibration(calibration.calibration_points, calibration.get_solute())
-            concentration = input('which spectrum to use for fitting data? enter concentration: ')
-            concentration = float(concentration)
-            reference_spectra.append(calibration.get_spectrum_by_concentration(concentration))
-            reference_names.append(calibration.get_solute())
-        return (reference_spectra, reference_names)
-
     def find_coefficients(self, spectrum:Spectrum, reference_spectra:list) -> np.ndarray:
         """
         """

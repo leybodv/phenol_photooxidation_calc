@@ -59,10 +59,10 @@ class Plotter():
         calibration_y_data = list()
         calibration_y_calc = list()
         for point in calibration.calibration_points:
-            ax_uvvis.plot(point.wavelength, point.absorbance, label=point.concentration)
-            calibration_x.append(point.concentration)
+            ax_uvvis.plot(point.get_wavelength(), point.get_absorbance(), label=point.get_concentration())
+            calibration_x.append(point.get_concentration())
             calibration_y_data.append(point.get_absorbance_at(calibration.calibration_wavelength))
-            calibration_y_calc.append(calibration.linear_func(point.concentration, calibration.calibration_coefficient))
+            calibration_y_calc.append(calibration.linear_func(point.get_concentration(), calibration.calibration_coefficient))
         ax_uvvis.axvline(x=calibration.calibration_wavelength, color='red')
         ax_calibration.scatter(calibration_x, calibration_y_data, c='red')
         ax_calibration.plot(calibration_x, calibration_y_calc, c='blue')

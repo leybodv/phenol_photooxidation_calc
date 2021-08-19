@@ -1,6 +1,5 @@
 # TODO: docs
 
-#from plotter import Plotter
 from calibration import Calibration
 from datapoint import DataPoint
 from spectrum import Spectrum
@@ -8,6 +7,8 @@ import numpy as np
 import scipy.optimize as spopt
 
 class ResultPoint():
+
+    mask_points_from = 450
 
     def __init__(self, experimental_point:DataPoint, calibrations:list):
         """
@@ -37,7 +38,13 @@ class ResultPoint():
         """
         """
         print(f'ResultPoint().find_coefficients(self, spectrum, reference_spectra):') #LOG
-        popt, pcov = spopt.curve_fit(lambda x, *params: self.get_fitted_y(x, reference_spectra, params), spectrum.get_wavelength(), spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 0.5), bounds=(0, 1), sigma=1/spectrum.get_absorbance())
+#        popt, pcov = spopt.curve_fit(lambda x, *params: self.get_fitted_y(x, reference_spectra, params), spectrum.get_wavelength(), spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 0.5), bounds=(0, 1), sigma=1/spectrum.get_absorbance())
+        truncated_spectrum = spectrum.truncate(self.mask_points_from, np.inf)
+        truncated_reference_spectra = list()
+        for reference_spectrum in reference_spectra:
+            truncated_reference_spectra.append(reference_spectrum.truncate(self.mask_points_from, np.inf))
+        popt, pcov = spopt.curve_fit(lambda x, *params: self.get_fitted_y(x, truncated_reference_spectra, params), truncated_spectrum.get_wavelength(), truncated_spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 0.5), bounds=(0, 1))
+#        popt, pcov = spopt.curve_fit(lambda x, *params: self.get_fitted_y(x, truncated_reference_spectra, params), truncated_spectrum.get_wavelength(), truncated_spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 0.5), bounds=(0, 1), sigma=1/truncated_spectrum.get_absorbance())
         print(f'{popt = }') #LOG
         return popt
 

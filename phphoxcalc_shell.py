@@ -99,5 +99,4 @@ class PhPhOxCalcShell(cmd.Cmd):
 
 
 if __name__ == '__main__':
-#    print(f'{dir() = }') #LOG
     PhPhOxCalcShell().cmdloop()

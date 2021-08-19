@@ -1,7 +1,6 @@
 # TODO: docs
 
 import numpy as np
-from spectrum import Spectrum
 
 class Spectrum():
     """
@@ -32,7 +31,7 @@ class Spectrum():
         print(f'Spectrum().get_absorbance(self, wavelength):') #LOG
         return self.absorbance[self.wavelength == wavelength][0]
 
-    def truncate(self, x_from:float, x_to:float) -> Spectrum:
+    def truncate(self, x_from:float, x_to:float) -> 'Spectrum':
         """
         """
         print(f'Spectrum().truncate(self, x_from, x_to)') #LOG

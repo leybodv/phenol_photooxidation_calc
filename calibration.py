@@ -3,7 +3,6 @@
 from pathlib import Path
 from uvvisparser import UvVisParser
 from calibrationpoint import CalibrationPoint
-#from plotter import Plotter
 from spectrum import Spectrum
 import scipy.optimize as spopt
 
@@ -27,6 +26,18 @@ class Calibration():
         """
         print(f'Calibration().get_solute(self):') #LOG
         return self.solute
+
+    def get_calibration_wavelength(self) -> float:
+        """
+        """
+        print(f'Calibration().get_calibration_wavelength(self):') #LOG
+        return self.calibration_wavelength
+
+    def get_calibration_coefficient(self) -> float:
+        """
+        """
+        print(f'Calibration().get_calibration_coefficient(self):') #LOG
+        return self.calibration_coefficient
 
     def parse_calibration_data(self, folder):
         """

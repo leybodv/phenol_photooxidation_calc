@@ -1,6 +1,5 @@
 # TODO: docs
 
-from calibration import Calibration
 from datapoint import DataPoint
 from spectrum import Spectrum
 import numpy as np

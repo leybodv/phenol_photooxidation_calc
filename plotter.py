@@ -40,11 +40,12 @@ class Plotter():
         ax.legend()
         return ax
 
-    def plot_raw_calibration(self, points):
+    def plot_raw_calibration(self, points, compound):
         """
         """
         print(f'Plotter().plot_raw_calibration(points):') #LOG
         fig, ax = plt.subplots()
+        ax.set_title(compound)
         for point in points:
             ax.plot(point.get_wavelength(), point.get_absorbance(), label=point.get_concentration())
         ax.legend()

@@ -28,6 +28,7 @@ class ResultPoint():
         for calibration in calibrations:
             Plotter().plot_raw_calibration(calibration.calibration_points, calibration.get_solute())
             concentration = input('which spectrum to use for fitting data? enter concentration: ')
+            concentration = float(concentration)
             reference_spectra.append(calibration.get_spectrum_by_concentration(concentration))
             reference_names.append(calibration.get_solute())
         return (reference_spectra, reference_names)
@@ -36,7 +37,8 @@ class ResultPoint():
         """
         """
         print(f'ResultPoint().find_coefficients(self, spectrum, reference_spectra):') #LOG
-        popt, pcov = spopt.curve_fit(lambda x, *params: self.get_fitted_y(x, reference_spectra, params), spectrum.get_wavelength(), spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 1))
+        popt, pcov = spopt.curve_fit(lambda x, *params: self.get_fitted_y(x, reference_spectra, params), spectrum.get_wavelength(), spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 0.5), bounds=(0, 1), sigma=1/spectrum.get_absorbance())
+        print(f'{popt = }') #LOG
         return popt
 
     def get_fitted_y(self, x:float, reference_spectra:list, coefficients:tuple) -> float:

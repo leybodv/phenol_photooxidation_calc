@@ -110,7 +110,7 @@ class Plotter():
         """
         """
         print(f'Plotter().plot_result_point(self, point)') #LOG
-        ax, fig = plt.subplots()
+        fig, ax = plt.subplots()
         ax.plot(datapoint.get_wavelength(), datapoint.get_absorbance(), label='raw data')
         for reference_name, corrected_reference_spectrum in zip(resultpoint.get_reference_names(), resultpoint.get_corrected_reference_spectra()):
             ax.plot(corrected_reference_spectrum.get_wavelength(), corrected_reference_spectrum.get_absorbance(), linestyle='--', label=reference_name)

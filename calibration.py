@@ -73,6 +73,7 @@ class Calibration():
         """
         """
         print(f'Calibration().get_spectrum_by_concentration(self, concentration)') #LOG
+        print(f'{type(concentration) = }') #LOG
         spectrum = None
         for point in self.calibration_points:
             if point.get_concentration() == concentration:

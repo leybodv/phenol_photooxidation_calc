@@ -1,5 +1,3 @@
-# TODO: docs
-
 from datapoint import DataPoint
 from spectrum import Spectrum
 import numpy as np

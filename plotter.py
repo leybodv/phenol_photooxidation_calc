@@ -1,5 +1,3 @@
-# TODO: docs
-
 import math
 import matplotlib.pyplot as plt
 import numpy as np
@@ -100,8 +98,14 @@ class Plotter():
         ax_uvvis.legend()
         plt.show(block=False)
 
-    def plot_results(self, results:list):
+    def plot_results(self, results:list[Result]):
         """
+        plots concentration vs. time plot for different products of phenol photocatalytic oxidation for every sample studied
+
+        parameters
+        ----------
+        results : list[Result]
+            list of results obtained after processing of experimental data
         """
         if len(results) == 1:
             fig, ax = plt.subplots()
@@ -120,6 +124,19 @@ class Plotter():
 
     def plotresult(self, ax:plt.Axes, result:Result) -> plt.Axes:
         """
+        plots concentration vs. time plot for different products of phenol photocatalytic oxidation for single sample
+
+        parameters
+        ----------
+        ax : matplotlib.pyplot.Axes
+            ax object to plot to
+        result : Result
+            result of processing of experimental data
+
+        returns
+        -------
+        ax : matplotlib.pyplot.Axes
+            ax object with plots added to it
         """
         ax.set_title(result.get_name())
         points_dict = {}
@@ -136,6 +153,14 @@ class Plotter():
 
     def plot_result_point(self, datapoint:DataPoint, resultpoint:ResultPoint):
         """
+        plots experimental spectrum, reference spectra used for fitting multiplied by corresponding coefficient and sum of reference spectra
+
+        parameters
+        ----------
+        datapoint : DataPoint
+            experimental data point with uv-vis spectrum
+        resultpoint : ResultPoint
+            result point with reference spectra, coefficients obtained after fitting
         """
         fig, ax = plt.subplots()
         ax.plot(datapoint.get_wavelength(), datapoint.get_absorbance(), label='raw data')

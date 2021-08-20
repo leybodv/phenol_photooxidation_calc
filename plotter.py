@@ -8,9 +8,18 @@ from result import Result
 from resultpoint import ResultPoint
 
 class Plotter():
+    """
+    utility class for plotting different types of data
+    """
 
     def plotrawdata(self, experiments):
         """
+        plots experimental data from studies of different samples
+
+        parameters
+        ----------
+        experiments : list[Experiment]
+            list of experiments with experimental data
         """
         if len(experiments) == 1:
             fig, ax = plt.subplots()
@@ -29,6 +38,19 @@ class Plotter():
 
     def plotrawexperiment(self, ax, experiment):
         """
+        plots single experimental data, i.e. uv-vis spectra at different times of experiment
+
+        parameters
+        ----------
+        ax : matplotlib.Axes
+            axes to plot to
+        experiment : Experiment
+            experimental data with uv-vis spectra obtained ad different times
+
+        returns
+        -------
+        ax : matplotlib.Axes
+            axes with plotted data
         """
         ax.set_title(experiment.sample_name)
         for data_point in experiment.data_points:
@@ -38,6 +60,14 @@ class Plotter():
 
     def plot_raw_calibration(self, points, compound):
         """
+        plots calibration data, i.e. uv-vis spectra for different concentrations of compound
+
+        parameters
+        ----------
+        points : list[CalibrationPoint]
+            list of calibration points with information about spectra and concentrations
+        compound : str
+            compound used for calibration
         """
         fig, ax = plt.subplots()
         ax.set_title(compound)
@@ -48,6 +78,12 @@ class Plotter():
 
     def plot_calibration(self, calibration):
         """
+        plots results of calibration as uv-vis spectra with vertical line at wavelength used for calibration and absorbance vs. concentration data, experimental and fitted by linear function
+
+        parameters
+        ----------
+        calibration : Calibration
+            calibration with corresponding uv-vis spectra, calibration wavelength and calibration coefficient
         """
         fig, (ax_uvvis, ax_calibration) = plt.subplots(ncols=2)
         calibration_x = list()

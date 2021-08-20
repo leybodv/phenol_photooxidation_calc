@@ -12,7 +12,6 @@ class Plotter():
     def plotrawdata(self, experiments):
         """
         """
-        print(f'Plotter().plotrawdata(experiments):') #LOG
         if len(experiments) == 1:
             fig, ax = plt.subplots()
             self.plotrawexperiment(ax, experiments[0])
@@ -21,7 +20,6 @@ class Plotter():
             cols = math.ceil(math.sqrt(len(experiments)))
             rows = math.ceil(len(experiments) / cols)
             fig, axs = plt.subplots(nrows=rows, ncols=cols)
-            print(f'{axs = }') #LOG
             for row in range(rows):
                 for col in range(cols):
                     if not bool(exps_copy):
@@ -32,19 +30,15 @@ class Plotter():
     def plotrawexperiment(self, ax, experiment):
         """
         """
-        print(f'Plotter().plotrawexperiment(ax, experiment):') #LOG
         ax.set_title(experiment.sample_name)
         for data_point in experiment.data_points:
             ax.plot(data_point.get_wavelength(), data_point.get_absorbance(), label=data_point.time)
-            print(f'{ax.get_children() = }') #LOG
-            print(f'{ax.get_children()[-1].get_label() = }') #LOG
         ax.legend()
         return ax
 
     def plot_raw_calibration(self, points, compound):
         """
         """
-        print(f'Plotter().plot_raw_calibration(points):') #LOG
         fig, ax = plt.subplots()
         ax.set_title(compound)
         for point in points:
@@ -55,7 +49,6 @@ class Plotter():
     def plot_calibration(self, calibration):
         """
         """
-        print(f'Plotter().plot_calibration(self, calibration):') #LOG
         fig, (ax_uvvis, ax_calibration) = plt.subplots(ncols=2)
         calibration_x = list()
         calibration_y_data = list()
@@ -74,7 +67,6 @@ class Plotter():
     def plot_results(self, results:list):
         """
         """
-        print(f'Plotter().plot_results(self, results):') #LOG
         if len(results) == 1:
             fig, ax = plt.subplots()
             self.plotresult(ax, results[0])
@@ -93,15 +85,14 @@ class Plotter():
     def plotresult(self, ax:plt.Axes, result:Result) -> plt.Axes:
         """
         """
-        print(f'Plotter().plotresult(self, ax, result)') #LOG
         ax.set_title(result.get_name())
         points_dict = {}
         for point in result.get_points():
             for name, concentration in zip(point.get_reference_names(), point.get_concentrations()):
                 if name not in points_dict:
                     points_dict[name] = (list(), list())
-            points_dict[name][0].append(point.get_time())
-            points_dict[name][1].append(concentration)
+                points_dict[name][0].append(point.get_time())
+                points_dict[name][1].append(concentration)
         for name in points_dict:
             ax.plot(points_dict[name][0], points_dict[name][1], label=name)
         ax.legend()
@@ -110,7 +101,6 @@ class Plotter():
     def plot_result_point(self, datapoint:DataPoint, resultpoint:ResultPoint):
         """
         """
-        print(f'Plotter().plot_result_point(self, point)') #LOG
         fig, ax = plt.subplots()
         ax.plot(datapoint.get_wavelength(), datapoint.get_absorbance(), label='raw data')
         sum_absorbance = np.full(len(datapoint.get_absorbance()), 0)

@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-# TODO: docs
 # TODO: plot experiment after adding automatically
 
 import cmd
@@ -10,6 +9,22 @@ from calibration import Calibration
 from result import Result
 
 class PhPhOxCalcShell(cmd.Cmd):
+    """
+    class is a cmd.Cmd subclass which starts shell and performs all procedures for adding and processing of experimental and calibration data
+
+    class variables
+    ---------------
+    intro : str
+        string that printed first at the begining of the execution
+    prompt : str
+        prompt which appears at each line when user's input required
+    experiments : list[Experiment]
+        list of experiments added by the user
+    calibrations : list[Calibration]
+        list of calibrations added by the user
+    results : list[Result]
+        list of result obtained by processing of experimental data
+    """
     intro = 'Process data of phenol photooxidation experiment. Type help or ? to list commands.\n'
     prompt = '> '
     experiments = list() #experiment space
@@ -24,22 +39,42 @@ class PhPhOxCalcShell(cmd.Cmd):
         -----------
             arg : str
                 arguments provided by user in a form of key=value pairs separated by space. Allowed values:
-                    sample_name=name:
+                    id=id:
                         Id of sample experiment were done with
-                    raw_data_path=path:
-                        Path to raw data file in a format <Wavelength>\t<absorbance@time0>\t<absorbance@time1>...
+                    path=path:
+                        Path to raw data file in a format <Wavelength><tab><absorbance@time0><tab><absorbance@time1>...
         """
         arguments = self.parse_args(arg)
-        self.experiments.append(Experiment(arguments['sample_name'], arguments['raw_data_path']))
+        self.experiments.append(Experiment(arguments['id'], arguments['path']))
 
     def do_addcalibration(self, arg):
         """
+        adds calibration data to program
+
+        parameters
+        ----------
+        arg : str
+            arguments provided by user in a form of key=value pairs separated by space. allowed values:
+                solute=solute
+                    name of compound used for calibration
+                solvent=solvent
+                    name of solvent used for calibration
+                path=path
+                    path to folder with calibration files in a format <wavelength><tab><absorbance> with single header row
         """
         arguments = self.parse_args(arg)
-        self.calibrations.append(Calibration(solute=arguments['solute'], solvent=arguments['solvent'], folder=arguments['folder']))
+        self.calibrations.append(Calibration(solute=arguments['solute'], solvent=arguments['solvent'], folder=arguments['path']))
 
     def do_processexperiments(self, arg):
         """
+        find concentration of phenol oxidation products vs. time and plot results
+
+        parameters
+        ----------
+        arg : str
+            arguments provided by user in a form of key=value pairs separated by space. allowed values:
+                verbose=(True|False)
+                    if True plots of fitting experimental spectra by reference spectra will be shown
         """
         arguments = self.parse_args(arg)
         for experiment in self.experiments:
@@ -48,6 +83,12 @@ class PhPhOxCalcShell(cmd.Cmd):
 
     def do_plotrawdata(self, arg):
         """
+        plots added experimental data
+
+        parameters
+        ----------
+        arg : str
+            not used
         """
         if not bool(self.experiments):
             print(f'You need to add experiments first. Type help or ? to list commands.')
@@ -56,6 +97,14 @@ class PhPhOxCalcShell(cmd.Cmd):
 
     def do_execute(self, arg):
         """
+        executes command in file line-by-line
+
+        parameters
+        ----------
+        arg : str
+            arguments provided by user in a form of key=value pairs separated by space. allowed values:
+                path=path
+                    path to file with valid commands to be executed line-by-line by the program. lines started with # will be ignored
         """
         with open(arg) as f:
             for line in f:
@@ -65,6 +114,11 @@ class PhPhOxCalcShell(cmd.Cmd):
     def do_quit(self, arg):
         """
         Quits program
+
+        parameters
+        ----------
+        arg : str
+            not used
         """
         print('bye')
         return True
@@ -90,6 +144,6 @@ class PhPhOxCalcShell(cmd.Cmd):
             args_dict[s[0]] = s[1]
         return args_dict
 
-
+# start program execution
 if __name__ == '__main__':
     PhPhOxCalcShell().cmdloop()

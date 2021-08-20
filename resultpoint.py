@@ -134,21 +134,45 @@ class ResultPoint():
 
     def get_reference_names(self) -> list:
         """
+        getter to obtain reference compounds names
+
+        returns
+        -------
+        reference_names : list[Spectrum]
+            reference compounds names
         """
         return self.reference_names
 
     def get_time(self) -> float:
         """
+        getter to obtain time from the beginning of experiment
+
+        returns
+        -------
+        time : float
+            time from the beginning of experiment
         """
         return self.time
 
     def get_concentrations(self) -> np.ndarray:
         """
+        getter to obtain concentrations of phenol oxidation products
+
+        returns
+        -------
+        concentrations : numpy.ndarray[float]
+            concentrations of phenol oxidation products
         """
         return self.concentrations
 
     def get_corrected_reference_spectra(self) -> list:
         """
+        calculates reference spectra with absorbances multiplied by corresponding fitting coefficients
+
+        returns
+        -------
+        corrected_spectra : list[Spectrum]
+            reference spectra with absorbances multiplied by corresponding fitting coefficients
         """
         corrected_spectra = list()
         for spectrum, coefficient in zip(self.reference_spectra, self.coefficients):

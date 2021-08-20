@@ -27,8 +27,8 @@ class ResultPoint():
         truncated_reference_spectra = list()
         for reference_spectrum in reference_spectra:
             truncated_reference_spectra.append(reference_spectrum.truncate(self.mask_points_from, np.inf))
-        popt, pcov = spopt.curve_fit(lambda x, *params: self.get_fitted_y(x, truncated_reference_spectra, params), truncated_spectrum.get_wavelength(), truncated_spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 0.5), bounds=(0, 1))
-#        popt, pcov = spopt.curve_fit(lambda x, *params: self.get_fitted_y(x, truncated_reference_spectra, params), truncated_spectrum.get_wavelength(), truncated_spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 0.5), bounds=(0, 1), sigma=1/truncated_spectrum.get_absorbance())
+        popt, pcov = spopt.curve_fit(lambda x, *params: self.get_fitted_y(x, truncated_reference_spectra, params), truncated_spectrum.get_wavelength(), truncated_spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 0.5), bounds=(0, np.inf))
+#        popt, pcov = spopt.curve_fit(lambda x, *params: self.get_fitted_y(x, truncated_reference_spectra, params), truncated_spectrum.get_wavelength(), truncated_spectrum.get_absorbance(), p0=np.full(len(reference_spectra), 0.5), bounds=(0, np.inf), sigma=1/truncated_spectrum.get_absorbance())
         print(f'{popt = }') #LOG
         return popt
 

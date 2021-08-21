@@ -19,7 +19,7 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 &emsp;&emsp;`<verbosity>`: True|False, if True, plots of fitting experimental spectra by reference spectra will be shown\
 \
 `plotrawdata`\
-&emsp;plots experimental uv-vis spectra added by addexperiment command\
+&emsp;plots experimental uv-vis spectra added by `addexperiment` command\
 \
 `execute path=<path>`\
 &emsp;executes commands in file line-by-line ignoring lines started with '#'\

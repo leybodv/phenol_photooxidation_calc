@@ -5,32 +5,25 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 \
 `addexperiment id=<id> path=<path>`\
 &emsp;adds experiment results which are uv-vis spectra obtained from samples collected at different time from the beginning of experiment\
-&nbsp;&nbsp;&nbsp;&nbsp;`<id>`: id of experiment, usually photocatalyst sample's id\
-&nbsp;&nbsp;&nbsp;&nbsp;`<path>`: path to file with experimental data in a format \<wavelength\>\<tab\>\<absorbance@time0\>\<tab\>\<absorbance@time1\>... with single header row in a format \<some-text\>\<tab\>\<time0\>\<tab\>\<time1\>...\
+&emsp;&emsp;`<id>`: id of experiment, usually photocatalyst sample's id\
+&emsp;&emsp;`<path>`: path to file with experimental data in a format \<wavelength\>\<tab\>\<absorbance@time0\>\<tab\>\<absorbance@time1\>... with single header row in a format \<some-text\>\<tab\>\<time0\>\<tab\>\<time1\>...\
 \
-addcalibration solute=\<solute\> solvent=\<solvent\> path=\<path\>
-
-        adds uv-vis spectra for absorbance vs. concentration calibration
-
-        \<solute\>: compound's name which was used for calibration
-
-        \<solvent\>: solvent used for calibration
-
-        \<path\>: path to folder with calibration data in a format \<wavelength\>\<tab\>\<absorbance\> with single header row
-
-
-processexperiments verbose=\<verbosity\>
-
-        finds concentrations of phenol oxidation products vs. time based on experimental and calibration data
-
-        \<verbosity\>: True|False, if True, plots of fitting experimental spectra by reference spectra will be shown
-
-plotrawdata
-        plots experimental uv-vis spectra added by addexperiment command
-
-execute path=\<path\>
-        executes commands in file line-by-line ignoring lines started with '#'
-        \<path\>: path to file with commands
-
-quit
-        quits program
+`addcalibration solute=<solute> solvent=<solvent> path=<path>`\
+&emsp;adds uv-vis spectra for absorbance vs. concentration calibration\
+&emsp;&emsp;`<solute>`: compound's name which was used for calibration\
+&emsp;&emsp;`<solvent>`: solvent used for calibration\
+&emsp;&emsp;`<path>`: path to folder with calibration data in a format \<wavelength\>\<tab\>\<absorbance\> with single header row\
+\
+`processexperiments verbose=<verbosity>`\
+&emsp;finds concentrations of phenol oxidation products vs. time based on experimental and calibration data\
+&emsp;&emsp;`<verbosity>`: True|False, if True, plots of fitting experimental spectra by reference spectra will be shown\
+\
+`plotrawdata`\
+&emsp;plots experimental uv-vis spectra added by addexperiment command\
+\
+`execute path=<path>`\
+&emsp;executes commands in file line-by-line ignoring lines started with '#'\
+&emsp;&emsp;`<path>`: path to file with commands\
+\
+`quit`\
+&emsp;quits program\

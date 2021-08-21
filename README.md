@@ -1,7 +1,7 @@
 # phenol_photooxidation_calc
-Command line program to process experimental data of phenol photooxidation experiment using multicomponent approach described in \[doi: 10.1016/S1386-1425(02)00172-5\] and \[doi: 10.1080/09593331708616383\]. To run program start phphoxcalc_shell.py. The program executes commands entered by user. Also there is an option to process commands from file line-by-ldine ignoring lines which start with '#' symbol.
-
-List of available commands (can be listed inside program by typing 'help' or '?'):
+Command line program to process experimental data of phenol photooxidation experiment using multicomponent approach described in \[doi: 10.1016/S1386-1425(02)00172-5\] and \[doi: 10.1080/09593331708616383\]. To run program start phphoxcalc_shell.py. The program executes commands entered by user. Also there is an option to process commands from file line-by-ldine ignoring lines which start with '#' symbol.\
+\
+List of available commands (can be listed inside program by typing 'help' or '?'):\
 'addexperiment id=\<id\> path=\<path\>'\
         adds experiment results which is uv-vis spectra obtained from samples collected at different time from the beginning of experiment
         \<id\>: id of experiment, usually photocatalyst sample's id

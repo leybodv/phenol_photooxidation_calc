@@ -49,5 +49,8 @@ class Experiment():
         data_points = list()
         for i in range(len(data)):
             if i != 0:
-                data_points.append(DataPoint(time=header[i], wavelength=data[0], absorbance=data[i]))
+                absorbance = data[i]
+                if np.any(data[i] < 0):
+                    absorbance = data[i] + abs(data[i].min())
+                data_points.append(DataPoint(time=header[i], wavelength=data[0], absorbance=absorbance))
         return data_points

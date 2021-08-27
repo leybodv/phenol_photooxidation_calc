@@ -42,10 +42,12 @@ class PhPhOxCalcShell(cmd.Cmd):
                     id=id:
                         Id of sample experiment were done with
                     path=path:
-                        Path to raw data file in a format <Wavelength><tab><absorbance@time0><tab><absorbance@time1>...
+                        Path to raw data
+                    format=file|folder
+                        Format of data. If 'file' program expects single file with data in a format <Wavelength><tab><absorbance@time0><tab><absorbance@time1>... If 'folder' program expects folder with files with data in a format <wavelength><tab><absorbance>. Time of sample collection from the beginning of the experiment is asked from the user.
         """
         arguments = self.parse_args(arg)
-        self.experiments.append(Experiment(arguments['id'], arguments['path']))
+        self.experiments.append(Experiment(arguments['id'], arguments['path'], arguments['format']))
 
     def do_addcalibration(self, arg):
         """

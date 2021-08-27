@@ -1,4 +1,5 @@
 import numpy as np
+from uvvisparser import UvVisParser
 from datapoint import DataPoint
 
 class Experiment():

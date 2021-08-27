@@ -15,7 +15,7 @@ class Experiment():
         collection of data points with uv-vis spectra and times
     """
 
-    def __init__(self, sample_name, raw_data_path):
+    def __init__(self, sample_name, raw_data_path, data_format:str):
         """
         assigns parameters to instance variables and parses experimental data
 
@@ -24,11 +24,19 @@ class Experiment():
         sample_name : str
             photocatalyst sample's id
         raw_data_path : str or Path
-            path to file with experimental data
+            path to file or folder with experimental data
+        data_format : str
+            format of experimental data. If 'file', data must be in a single file; if 'folder', data must be in separate files in a folder
         """
         self.sample_name = sample_name
         self.raw_data_path = raw_data_path
-        self.data_points = self.parse_uv_vis(raw_data_path)
+        if data_format == 'file':
+            self.data_points = self.parse_uv_vis(raw_data_path)
+        elif data_format == 'folder':
+            self.data_points = UvVisParser().parse_experimental_from_folder(raw_data_path)
+        else:
+            print(f'Cannot recognize experimental data of format {data_format}')
+            return
 
     def parse_uv_vis(self, raw_data_path):
         """

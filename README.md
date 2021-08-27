@@ -3,10 +3,11 @@ Command line program to process experimental data of phenol photooxidation exper
 \
 List of available commands (can be listed inside program by typing 'help' or '?'):\
 \
-`addexperiment id=<id> path=<path>`\
+`addexperiment id=<id> path=<path> format=<format>`\
 &emsp;adds experiment results which are uv-vis spectra obtained from samples collected at different time from the beginning of experiment\
 &emsp;&emsp;`<id>`: id of experiment, usually photocatalyst sample's id\
 &emsp;&emsp;`<path>`: path to file with experimental data in a format \<wavelength\>\<tab\>\<absorbance@time0\>\<tab\>\<absorbance@time1\>... with single header row in a format \<some-text\>\<tab\>\<time0\>\<tab\>\<time1\>...\
+&emsp;&emsp;`<format>`: file|folder, if 'file', program expects experimental data in a single file in a format \<wavelength\>\<tab\>\<absorbance@time0\>\<tab\>\<absorbance@time1\>... with single header row in a format \<some-text\>\<tab\>\<time0\>\<tab\>\<time1\>... if 'folder', program expects experimental data in several files in a format \<wavelength\>\<tab\>\<absorbance\> with single header row and it will ask user for time from the beginning of experiment for each imported file\
 \
 `addcalibration solute=<solute> solvent=<solvent> path=<path>`\
 &emsp;adds uv-vis spectra for absorbance vs. concentration calibration\

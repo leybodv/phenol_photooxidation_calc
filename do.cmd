@@ -1,1 +1,2 @@
-addcalibration solute=formic-acid solvent=water path=/home/d/git/phenol_photooxidation_calc/calibrations/formic-acid
+addexperiment id=dl100 path=/home/d/yandex-disk/science/6-defBN-phenol-photooxidation/photocatalysis/dl100-1 format=folder
+plotrawdata

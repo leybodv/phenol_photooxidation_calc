@@ -17,3 +17,7 @@ calibration made for concentrations 230μM, 115μM, 57.5μM, 28.75μM
 phenol/:
 calibration files for phenol/water solutions obtained with Shimadzu UVmini-1240 spectrometer
 calibration made for concentrations 270μM, 135μM, 67.5μM, 33.75μM
+
+h2o2/:
+calibration files for h2o2/water solutions obrained with Shimadzu UVmini-1240 spectrometer
+calibration made for concentrations 8500, 4250, 2125, 1062.5 μM

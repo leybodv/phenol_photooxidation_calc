@@ -45,9 +45,13 @@ class PhPhOxCalcShell(cmd.Cmd):
                         Path to raw data
                     format=file|folder
                         Format of data. If 'file' program expects single file with data in a format <Wavelength><tab><absorbance@time0><tab><absorbance@time1>... If 'folder' program expects folder with files with data in a format <wavelength><tab><absorbance>. Time of sample collection from the beginning of the experiment is asked from the user.
+                    phenol=conc
+                        Initial concentration of phenol in μM
+                    peroxide=conc
+                        Initial concentration of peroxide in μM
         """
         arguments = self.parse_args(arg)
-        self.experiments.append(Experiment(arguments['id'], arguments['path'], arguments['format']))
+        self.experiments.append(Experiment(sample_name=arguments['id'], raw_data_path=arguments['path'], data_format=arguments['format'], phenol_init_conc=arguments['phenol'], peroxide_init_conc=arguments['peroxide']))
 
     def do_addcalibration(self, arg):
         """

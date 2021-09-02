@@ -30,9 +30,9 @@ class Result():
             if True, fitting experimental spectrum with reference spectra plots will be shown
         """
         self.sample_name = experiment.sample_name
-        self.result_points = self.calculate_results(experiment.data_points, calibrations, verbose)
+        self.result_points = self.calculate_results(raw_data_points=experiment.data_points, calibrations=calibrations, phenol_init_conc=experiment.get_phenol_init_concentration(), peroxide_init_conc=experiment.get_peroxide_init_concentration(), verbose=verbose)
 
-    def calculate_results(self, raw_data_points:list[DataPoint], calibrations:list[Calibration], verbose:bool):
+    def calculate_results(self, raw_data_points:list[DataPoint], calibrations:list[Calibration], phenol_init_conc:float, peroxide_init_conc:float, verbose:bool):
         """
         creates list of ResultPoint objects with experimental data processing results
 
@@ -42,6 +42,10 @@ class Result():
             list of data points with experimental results
         calibrations : list[Calibration]
             list of calibration data
+        phenol_init_conc : float
+            initial concentration of phenol solution in μM
+        peroxide_init_conc : float
+            initial concentration of peroxide solution in μM
         verbose : bool
             if True, fitting experimental spectrum with reference spectra plots will be shown
 
@@ -61,7 +65,7 @@ class Result():
         calibration_coefficients = np.array(calibration_coefficients)
         reference_spectra, reference_names = self.find_out_spectra(calibrations)
         for point in raw_data_points:
-            resultpoint = ResultPoint(experimental_point=point, reference_spectra=reference_spectra, reference_names=reference_names, calibration_coefficients=calibration_coefficients, calibration_wavelengths=calibration_wavelengths)
+            resultpoint = ResultPoint(experimental_point=point, reference_spectra=reference_spectra, reference_names=reference_names, calibration_coefficients=calibration_coefficients, calibration_wavelengths=calibration_wavelengths, phenol_init_conc=phenol_init_conc, peroxide_init_conc=peroxide_init_conc)
             result_points.append(resultpoint)
             if verbose:
                 Plotter().plot_result_point(point, resultpoint)

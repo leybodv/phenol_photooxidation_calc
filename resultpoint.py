@@ -31,7 +31,7 @@ class ResultPoint():
     use_points_from = 190
     use_points_to = 450
 
-    def __init__(self, experimental_point:DataPoint, reference_spectra:list, reference_names:list, calibration_coefficients:np.ndarray, calibration_wavelengths:np.ndarray):
+    def __init__(self, experimental_point:DataPoint, reference_spectra:list, reference_names:list, calibration_coefficients:np.ndarray, calibration_wavelengths:np.ndarray, phenol_init_conc:float, peroxide_init_conc:float):
         """
         assigns parameters to instance variables, calculates fitting coefficients and concentrations of reference compounds
 
@@ -45,16 +45,20 @@ class ResultPoint():
             reference compounds names
         calibration_coefficients : numpy.ndarray[float]
             coefficients of absorbance vs. concentration calibration for reference compounds
-        calibration_wavelengths : numpy.ndarrat[float]
+        calibration_wavelengths : numpy.ndarray[float]
             wavelengths used for absorbance vs. concentration calibration for reference compounds
+        phenol_init_conc : float
+            initial concentration of phenol in μM
+        peroxide_init_conc : float
+            initial concentration of h2o2 in μM
         """
         self.time = experimental_point.time
         self.reference_spectra = reference_spectra
         self.reference_names = reference_names
-        self.coefficients = self.find_coefficients(experimental_point.spectrum, self.reference_spectra)
+        self.coefficients = self.find_coefficients(experimental_point.spectrum, self.reference_spectra, reference_names, calibration_coefficients, calibration_wavelengths, phenol_init_conc, peroxide_init_conc)
         self.concentrations = self.find_concentrations(self.coefficients, self.reference_spectra, calibration_coefficients, calibration_wavelengths)
 
-    def find_coefficients(self, spectrum:Spectrum, reference_spectra:list) -> np.ndarray:
+    def find_coefficients(self, spectrum:Spectrum, reference_spectra:list[Spectrum], reference_names:list[str], conc_calibration_coefficients:np.ndarray, calibration_wavelengths:np.ndarray, phenol_init_conc:float, peroxide_init_conc:float) -> np.ndarray:
         """
         finds coefficients of fitting of experimental spectrum with reference spectra. fitting function is absorbance_fitted = sum(reference_absorbance_i * coefficient_i). coefficients are found by scipy.optimize.least_squares method with bounds from 0 to infinity. only part of spectra from use_points_from to use_points_to is used to reduce influence of baseline data
 
@@ -64,6 +68,16 @@ class ResultPoint():
             experimental spectrum
         reference_spectra : list[Spectrum]
             reference spectra used for fitting
+        reference_names : list[str]
+            reference compounds names, order must match corresponding reference_spectra
+        conc_calibration_coefficients : numpy.ndarray[float]
+            list of concentration calibration coefficients for corresponding compounds
+        calibration_wavelengths : numpy.ndarray[float]
+            list of calibration wavelengths for corresponding reference compounds
+        phenol_init_conc : float
+            initial concentration of phenol solution in μM
+        peroxide_init_conc : float
+            initial concentration of h2o2 solution in μM
 
         returns
         -------
@@ -75,7 +89,17 @@ class ResultPoint():
         for reference_spectrum in reference_spectra:
             truncated_reference_spectra.append(reference_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to))
         coefficients_guess = np.full(len(reference_spectra), 0.5)
-        fit_results = spopt.least_squares(self.get_residuals_y, coefficients_guess, bounds=(0, np.inf), loss='linear', args=(truncated_reference_spectra, truncated_spectrum))
+        bounds = list()
+        for reference_spectrum, ref_compound, conc_calibration_coef, calibration_wavelength in zip(reference_spectra, reference_names, conc_calibration_coefficients, calibration_wavelengths):
+            if ref_compound in ['phenol', 'benzoquinone', 'catechol', 'hydroquinone']:
+                bounds.append((0, phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)))
+            elif ref_compound == 'formic-acid':
+                bounds.append((0, 6 * phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)))
+            elif ref_compound == 'h2o2':
+                bounds.append((0, peroxide_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)))
+            else:
+                bounds.append((0, np.inf))
+        fit_results = spopt.least_squares(self.get_residuals_y, coefficients_guess, bounds=bounds, loss='linear', args=(truncated_reference_spectra, truncated_spectrum))
         return fit_results.x
 
     def get_residuals_y(self, coefficients:list[float], reference_spectra:list[Spectrum], experimental_spectrum:Spectrum) -> np.ndarray:

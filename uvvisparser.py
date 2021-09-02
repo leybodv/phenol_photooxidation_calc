@@ -25,7 +25,7 @@ class UvVisParser():
         absorbance : numpy.ndarray[float]
             array of absorbances parsed from file
         """
-        concentration = input(f'Importing file {file}. Enter concentration of solute [mmol/L]: ')
+        concentration = input(f'Importing file {file}. Enter concentration of solute [μM]: ')
         concentration = float(concentration)
         wavelength, absorbance = self.parse_uvvis(file)
         return (concentration, wavelength, absorbance)

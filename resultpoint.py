@@ -88,18 +88,23 @@ class ResultPoint():
         truncated_reference_spectra = list()
         for reference_spectrum in reference_spectra:
             truncated_reference_spectra.append(reference_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to))
-        coefficients_guess = np.full(len(reference_spectra), 0.5)
-        bounds = list()
+        coefficients_guess = list()
+        bounds_low = list()
+        bounds_high = list()
         for reference_spectrum, ref_compound, conc_calibration_coef, calibration_wavelength in zip(reference_spectra, reference_names, conc_calibration_coefficients, calibration_wavelengths):
+            bl = 0
             if ref_compound in ['phenol', 'benzoquinone', 'catechol', 'hydroquinone']:
-                bounds.append((0, phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)))
+                bh = phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
             elif ref_compound == 'formic-acid':
-                bounds.append((0, 6 * phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)))
+                bh = 6 * phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
             elif ref_compound == 'h2o2':
-                bounds.append((0, peroxide_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)))
+                bh = peroxide_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
             else:
-                bounds.append((0, np.inf))
-        fit_results = spopt.least_squares(self.get_residuals_y, coefficients_guess, bounds=bounds, loss='linear', args=(truncated_reference_spectra, truncated_spectrum))
+                bh = np.inf
+            coefficients_guess.append((bl + bh) / 2)
+            bounds_low.append(bl)
+            bounds_high.append(bh)
+        fit_results = spopt.least_squares(self.get_residuals_y, coefficients_guess, bounds=(bounds_low, bounds_high), loss='linear', args=(truncated_reference_spectra, truncated_spectrum))
         return fit_results.x
 
     def get_residuals_y(self, coefficients:list[float], reference_spectra:list[Spectrum], experimental_spectrum:Spectrum) -> np.ndarray:

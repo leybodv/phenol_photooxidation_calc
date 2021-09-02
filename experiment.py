@@ -39,8 +39,8 @@ class Experiment():
         """
         self.sample_name = sample_name
         self.raw_data_path = raw_data_path
-        self.phenol_init_conc = phenol_init_conc
-        self.peroxide_init_conc = peroxide_init_conc
+        self.phenol_init_conc = float(phenol_init_conc)
+        self.peroxide_init_conc = float(peroxide_init_conc)
         if data_format == 'file':
             self.data_points = self.parse_uv_vis(raw_data_path)
         elif data_format == 'folder':

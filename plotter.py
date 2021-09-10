@@ -107,49 +107,75 @@ class Plotter():
         results : list[Result]
             list of results obtained after processing of experimental data
         """
-        if len(results) == 1:
-            fig, ax = plt.subplots()
-            self.plotresult(ax, results[0])
-        else:
-            rests_copy = results.copy()
-            cols = math.ceil(math.sqrt(len(results)))
-            rows = math.ceil(len(results) / cols)
-            fig, axs = plt.subplots(nrows=rows, ncols=cols)
-            for row in range(rows):
-                for col in range(cols):
-                    if not bool(rests_copy):
-                        break
-                    self.plotresult(axs[row,col], rests_copy.pop(0))
-        plt.show(block=False)
+        for result in results:
+            points_dict = {}
+            for point in result.get_points():
+                for name, concentration in zip(point.get_reference_names(), point.get_concentrations()):
+                    if name not in points_dict:
+                        points_dict[name] = (list(), list())
+                    points_dict[name][0].append(point.get_time())
+                    points_dict[name][1].append(concentration)
+            if len(points_dict) == 1:
+                fig, ax = plt.subplots()
+                name, xy = points_dict.popitem()
+                ax.set_title(name)
+                ax.plot(xy[0], xy[1])
+            else:
+                cols = math.ceil(math.sqrt(len(points_dict)))
+                rows = math.ceil(len(points_dict) / cols)
+                fig, axs = plt.subplots(nrows=rows, ncols=cols)
+                for row in range(rows):
+                    for col in range(cols):
+                        if not bool(points_dict):
+                            break
+                        name, xy = points_dict.popitem()
+                        axs[row,col].set_title(name)
+                        axs[row,col].plot(xy[0], xy[1])
+            plt.suptitle(result.get_name())
+            plt.show(block=False)
+        # if len(results) == 1:
+        #     fig, ax = plt.subplots()
+        #     self.plotresult(ax, results[0])
+        # else:
+        #     rests_copy = results.copy()
+        #     cols = math.ceil(math.sqrt(len(results)))
+        #     rows = math.ceil(len(results) / cols)
+        #     fig, axs = plt.subplots(nrows=rows, ncols=cols)
+        #     for row in range(rows):
+        #         for col in range(cols):
+        #             if not bool(rests_copy):
+        #                 break
+        #             self.plotresult(axs[row,col], rests_copy.pop(0))
+        # plt.show(block=False)
 
-    def plotresult(self, ax:plt.Axes, result:Result) -> plt.Axes:
-        """
-        plots concentration vs. time plot for different products of phenol photocatalytic oxidation for single sample
+    # def plotresult(self, ax:plt.Axes, result:Result) -> plt.Axes:
+        # """
+        # plots concentration vs. time plot for different products of phenol photocatalytic oxidation for single sample
 
-        parameters
-        ----------
-        ax : matplotlib.pyplot.Axes
-            ax object to plot to
-        result : Result
-            result of processing of experimental data
+        # parameters
+        # ----------
+        # ax : matplotlib.pyplot.Axes
+        #     ax object to plot to
+        # result : Result
+        #     result of processing of experimental data
 
-        returns
-        -------
-        ax : matplotlib.pyplot.Axes
-            ax object with plots added to it
-        """
-        ax.set_title(result.get_name())
-        points_dict = {}
-        for point in result.get_points():
-            for name, concentration in zip(point.get_reference_names(), point.get_concentrations()):
-                if name not in points_dict:
-                    points_dict[name] = (list(), list())
-                points_dict[name][0].append(point.get_time())
-                points_dict[name][1].append(concentration)
-        for name in points_dict:
-            ax.plot(points_dict[name][0], points_dict[name][1], label=name)
-        ax.legend()
-        return ax
+        # returns
+        # -------
+        # ax : matplotlib.pyplot.Axes
+        #     ax object with plots added to it
+        # """
+        # ax.set_title(result.get_name())
+        # points_dict = {}
+        # for point in result.get_points():
+        #     for name, concentration in zip(point.get_reference_names(), point.get_concentrations()):
+        #         if name not in points_dict:
+        #             points_dict[name] = (list(), list())
+        #         points_dict[name][0].append(point.get_time())
+        #         points_dict[name][1].append(concentration)
+        # for name in points_dict:
+        #     ax.plot(points_dict[name][0], points_dict[name][1], label=name)
+        # ax.legend()
+        # return ax
 
     def plot_result_point(self, datapoint:DataPoint, resultpoint:ResultPoint):
         """

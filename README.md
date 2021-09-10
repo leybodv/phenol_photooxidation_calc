@@ -1,5 +1,5 @@
 # phenol_photooxidation_calc
-Command line program to process experimental data of phenol photooxidation experiment using multicomponent approach described in \[doi: 10.1016/S1386-1425(02)00172-5\] and \[doi: 10.1080/09593331708616383\]. To run program start `phphoxcalc_shell.py`. The program executes commands entered by user. Also there is an option to process commands from file line-by-ldine ignoring lines which start with '#' symbol.\
+Command line program to process experimental data of phenol photooxidation experiment using multicomponent approach described in \[doi: 10.1016/S1386-1425(02)00172-5\] and \[doi: 10.1080/09593331708616383\]. To run program start `phphoxcalc_shell.py`. The program executes commands entered by user. Also there is an option to process commands from file line-by-line ignoring lines which start with '#' symbol.\
 \
 List of available commands (can be listed inside program by typing 'help' or '?'):\
 \

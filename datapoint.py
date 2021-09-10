@@ -50,3 +50,14 @@ class DataPoint():
             array of absorbances of uv-vis spectrum
         """
         return self.spectrum.get_absorbance()
+
+    def get_time(self) -> float:
+        """
+        getter to obtain time from the beginning of the experiment
+
+        returns
+        -------
+        time : float
+            time from the beginning of the experiment
+        """
+        return self.time

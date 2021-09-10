@@ -51,6 +51,7 @@ class UvVisParser():
                 time = float(time)
                 wavelength, absorbance = self.parse_uvvis(file)
                 data_points.append(DataPoint(time, wavelength, absorbance))
+        data_points.sort(key=lambda point: point.get_time())
         return data_points
 
     def parse_uvvis(self, file:Path) -> tuple:

@@ -36,3 +36,4 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 - plot concentration vs. time at different panels
 - add scatter points on concentration vs. time panels
 - plot experiment after adding automatically
+- move experiment.parse_uv_vis method to UvVisParser

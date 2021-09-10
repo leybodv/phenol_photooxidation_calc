@@ -35,3 +35,4 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 - sort items before plotting
 - plot concentration vs. time at different panels
 - add scatter points on concentration vs. time panels
+- plot experiment after adding automatically

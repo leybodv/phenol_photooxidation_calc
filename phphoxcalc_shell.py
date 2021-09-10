@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-# TODO: plot experiment after adding automatically
-
 import cmd
 from experiment import Experiment
 from plotter import Plotter

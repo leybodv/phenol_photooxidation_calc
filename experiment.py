@@ -72,6 +72,7 @@ class Experiment():
                 if np.any(data[i] < 0):
                     absorbance = data[i] + abs(data[i].min())
                 data_points.append(DataPoint(time=header[i], wavelength=data[0], absorbance=absorbance))
+        data_points.sort(key=lambda point: point.get_time())
         return data_points
 
     def get_phenol_init_concentration(self) -> float:

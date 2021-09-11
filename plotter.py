@@ -4,35 +4,12 @@ import numpy as np
 from datapoint import DataPoint
 from result import Result
 from resultpoint import ResultPoint
+from experiment import Experiment
 
 class Plotter():
     """
     utility class for plotting different types of data
     """
-
-    def plotrawdata(self, experiments):
-        """
-        plots experimental data from studies of different samples
-
-        parameters
-        ----------
-        experiments : list[Experiment]
-            list of experiments with experimental data
-        """
-        if len(experiments) == 1:
-            fig, ax = plt.subplots()
-            self.plotrawexperiment(ax, experiments[0])
-        else:
-            exps_copy = experiments.copy()
-            cols = math.ceil(math.sqrt(len(experiments)))
-            rows = math.ceil(len(experiments) / cols)
-            fig, axs = plt.subplots(nrows=rows, ncols=cols)
-            for row in range(rows):
-                for col in range(cols):
-                    if not bool(exps_copy):
-                        break
-                    self.plotrawexperiment(axs[row,col], exps_copy.pop(0))
-        plt.show(block=False)
 
     def plotrawexperiment(self, ax, experiment):
         """
@@ -55,6 +32,30 @@ class Plotter():
             ax.plot(data_point.get_wavelength(), data_point.get_absorbance(), label=data_point.time)
         ax.legend()
         return ax
+
+    def plot_experiments(self, experiments:list[Experiment]):
+        """
+        plots experimental data from studies of different samples
+
+        parameters
+        ----------
+        experiments : list[Experiment]
+            list of experiments with experimental data
+        """
+        if len(experiments) == 1:
+            fig, ax = plt.subplots()
+            self.plotrawexperiment(ax, experiments[0])
+        else:
+            exps_copy = experiments.copy()
+            cols = math.ceil(math.sqrt(len(experiments)))
+            rows = math.ceil(len(experiments) / cols)
+            fig, axs = plt.subplots(nrows=rows, ncols=cols)
+            for row in range(rows):
+                for col in range(cols):
+                    if not bool(exps_copy):
+                        break
+                    self.plotrawexperiment(axs[row,col], exps_copy.pop(0))
+        plt.show(block=False)
 
     def plot_raw_calibration(self, points, compound):
         """

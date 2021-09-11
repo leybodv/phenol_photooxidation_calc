@@ -30,6 +30,32 @@ class UvVisParser():
         wavelength, absorbance = self.parse_uvvis(file)
         return (concentration, wavelength, absorbance)
 
+    def parse_experimental_from_file(self, file:str) -> list[DataPoint]:
+        """
+        parses uv-vis data. file must be in a format <wavelength><tab><absorbance@time0><tab><absorbance@time1>... file also must contain single row header in a format <some-text><tab><time0><tab><time1>...
+
+        parameters
+        ----------
+        file : str or Path
+            path to file with experimental data
+
+        returns
+        -------
+        data_points : list[DataPoint]
+            experimental data points with time and spectrum information
+        """
+        header = np.loadtxt(fname=file, delimiter='\t', dtype='str', encoding='utf-8', max_rows=1, unpack=True)
+        data = np.loadtxt(fname=file, delimiter='\t', skiprows=1, unpack=True, encoding='utf-8')
+        data_points = list()
+        for i in range(len(data)):
+            if i != 0:
+                absorbance = data[i]
+                if np.any(data[i] < 0):
+                    absorbance = data[i] + abs(data[i].min())
+                data_points.append(DataPoint(time=header[i], wavelength=data[0], absorbance=absorbance))
+        data_points.sort(key=lambda point: point.get_time())
+        return data_points
+
     def parse_experimental_from_folder(self, folder:str) -> list[DataPoint]:
         """
         import experimental data from folder with files containing data in a format <wavelength><tab><absorbance>. ask user about time of experiment for each file

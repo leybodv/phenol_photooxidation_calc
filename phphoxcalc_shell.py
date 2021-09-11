@@ -86,20 +86,6 @@ class PhPhOxCalcShell(cmd.Cmd):
             self.results.append(Result(experiment, self.calibrations, verbose=(arguments["verbose"] == "True")))
         Plotter().plot_results(self.results)
 
-    def do_plotrawdata(self, arg):
-        """
-        plots added experimental data
-
-        parameters
-        ----------
-        arg : str
-            not used
-        """
-        if not bool(self.experiments):
-            print(f'You need to add experiments first. Type help or ? to list commands.')
-            return
-        Plotter().plotrawdata(self.experiments)
-
     def do_execute(self, arg):
         """
         executes command in file line-by-line

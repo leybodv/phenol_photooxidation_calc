@@ -86,8 +86,15 @@ class ResultPoint():
         """
         truncated_spectrum = spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to)
         truncated_reference_spectra = list()
-        for reference_spectrum in reference_spectra:
-            truncated_reference_spectra.append(reference_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to))
+        for reference_name, reference_spectrum in zip(reference_names, reference_spectra):
+            if self.get_time() == 0:
+                if reference_name in ['phenol', 'h2o2']:
+                    truncated_reference_spectra.append(reference_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to))
+                else:
+                    new_spectrum = Spectrum(wavelength=reference_spectrum.get_wavelength(), absorbance=np.zeros_like(reference_spectrum.get_absorbance()))
+                    truncated_reference_spectra.append(new_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to))
+            else:
+                truncated_reference_spectra.append(reference_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to))
         coefficients_guess = list()
         bounds_low = list()
         bounds_high = list()

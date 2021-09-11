@@ -86,28 +86,31 @@ class ResultPoint():
         """
         truncated_spectrum = spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to)
         truncated_reference_spectra = list()
-        for reference_name, reference_spectrum in zip(reference_names, reference_spectra):
-            if self.get_time() == 0:
-                if reference_name in ['phenol', 'h2o2']:
-                    truncated_reference_spectra.append(reference_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to))
-                else:
-                    new_spectrum = Spectrum(wavelength=reference_spectrum.get_wavelength(), absorbance=np.zeros_like(reference_spectrum.get_absorbance()))
-                    truncated_reference_spectra.append(new_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to))
-            else:
-                truncated_reference_spectra.append(reference_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to))
+        for reference_spectrum in reference_spectra:
+            truncated_reference_spectra.append(reference_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to))
         coefficients_guess = list()
         bounds_low = list()
         bounds_high = list()
         for reference_spectrum, ref_compound, conc_calibration_coef, calibration_wavelength in zip(reference_spectra, reference_names, conc_calibration_coefficients, calibration_wavelengths):
             bl = 0
-            if ref_compound in ['phenol', 'benzoquinone', 'catechol', 'hydroquinone']:
-                bh = phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
-            elif ref_compound == 'formic-acid':
-                bh = 6 * phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
-            elif ref_compound == 'h2o2':
-                bh = peroxide_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
+            if self.get_time() == 0:
+                if ref_compound == 'phenol':
+                    bh = phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
+                elif ref_compound == 'h2o2':
+                    bh = peroxide_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
+                elif ref_compound in ['benzoquinone', 'catechol', 'hydroquinone', 'formic-acid']:
+                    bh = 10 ** (-9)
+                else:
+                    bh = np.inf
             else:
-                bh = np.inf
+                if ref_compound in ['phenol', 'benzoquinone', 'catechol', 'hydroquinone']:
+                    bh = phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
+                elif ref_compound == 'formic-acid':
+                    bh = 6 * phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
+                elif ref_compound == 'h2o2':
+                    bh = peroxide_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
+                else:
+                    bh = np.inf
             coefficients_guess.append((bl + bh) / 2)
             bounds_low.append(bl)
             bounds_high.append(bh)

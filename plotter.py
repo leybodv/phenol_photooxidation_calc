@@ -119,7 +119,7 @@ class Plotter():
                 fig, ax = plt.subplots()
                 name, xy = points_dict.popitem()
                 ax.set_title(name)
-                ax.plot(xy[0], xy[1])
+                ax.plot(xy[0], xy[1], linestyle='--', marker='.')
             else:
                 cols = math.ceil(math.sqrt(len(points_dict)))
                 rows = math.ceil(len(points_dict) / cols)
@@ -130,7 +130,7 @@ class Plotter():
                             break
                         name, xy = points_dict.popitem()
                         axs[row,col].set_title(name)
-                        axs[row,col].plot(xy[0], xy[1])
+                        axs[row,col].plot(xy[0], xy[1], linestyle='--', marker='.')
             plt.suptitle(result.get_name())
             plt.show(block=False)
 

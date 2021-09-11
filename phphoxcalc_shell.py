@@ -50,6 +50,7 @@ class PhPhOxCalcShell(cmd.Cmd):
         """
         arguments = self.parse_args(arg)
         self.experiments.append(Experiment(sample_name=arguments['id'], raw_data_path=arguments['path'], data_format=arguments['format'], phenol_init_conc=arguments['phenol'], peroxide_init_conc=arguments['peroxide']))
+        Plotter().plot_experiments(self.experiments)
 
     def do_addcalibration(self, arg):
         """

@@ -32,7 +32,7 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 &emsp;quits program\
 
 # TODO
-- plot concentration vs. time at different panels
+- at 0 min there are no intermediate compounds
 - add scatter points on concentration vs. time panels
 - plot experiment after adding automatically
 - move experiment.parse_uv_vis method to UvVisParser

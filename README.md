@@ -29,7 +29,6 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 &emsp;quits program\
 
 # TODO
-- plot experiment after adding automatically
 - move experiment.parse_uv_vis method to UvVisParser
 - ask user to add calibrations for benzoquinone, catechol, formic acid, hydroquinone, h2o2 and phenol automatically and choose predefined reference spectra to fit experimental data
 - add time to the title of plots with fitting of experimental spectrum with references

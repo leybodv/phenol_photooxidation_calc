@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import cmd
+import xml.etree.ElementTree as ET
 from experiment import Experiment
 from plotter import Plotter
 from calibration import Calibration
@@ -69,6 +70,13 @@ class PhPhOxCalcShell(cmd.Cmd):
         """
         arguments = self.parse_args(arg)
         self.calibrations.append(Calibration(solute=arguments['solute'], solvent=arguments['solvent'], folder=arguments['path']))
+
+    def do_addcalibrations(self, arg):
+        """
+        """
+        arguments = self.parse_args(arg)
+        tree = ET.parse(arguments['file'])
+        root = tree.getroot()
 
     def do_processexperiments(self, arg):
         """

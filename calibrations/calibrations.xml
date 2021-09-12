@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<calibrations>
+  <calibration>
+    <solute>benzoquinone</solute>
+    <solvent>water</solvent>
+    <wavelength unit="nm">246</wavelength>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/benzoquinone/benzoquinone-water_13.75µM.txt</path>
+      <concentration unit="μM">13.75</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/benzoquinone/benzoquinone-water_27.5µM.txt</path>
+      <concentration unit="μM">27.5</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/benzoquinone/benzoquinone-water_55µM.txt</path>
+      <concentration unit="μM">55</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/benzoquinone/benzoquinone-water_110µM.txt</path>
+      <concentration unit="μM">110</concentration>
+    </point>
+  </calibration>
+  <calibration>
+    <solute>catechol</solute>
+    <solvent>water</solvent>
+    <wavelength unit="nm">275</wavelength>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/catechol/catechol-water_16.25µM.txt</path>
+      <concentration unit="μM">16.25</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/catechol/catechol-water_32.5µM.txt</path>
+      <concentration unit="μM">32.5</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/catechol/catechol-water_65µM.txt</path>
+      <concentration unit="μM">65</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/catechol/catechol-water_130µM.txt</path>
+      <concentration unit="μM">130</concentration>
+    </point>
+  </calibration>
+  <calibration>
+    <solute>formic-acid</solute>
+    <solvent>water</solvent>
+    <wavelength unit="nm">206</wavelength>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/formic-acid/formic-acid-water_4375µM.txt</path>
+      <concentration unit="μM">4375</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/formic-acid/formic-acid-water_8750µM.txt</path>
+      <concentration unit="μM">8750</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/formic-acid/formic-acid-water_17500µM.txt</path>
+      <concentration unit="μM">17500</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/formic-acid/formic-acid-water_35000µM.txt</path>
+      <concentration unit="μM">35000</concentration>
+    </point>
+  </calibration>

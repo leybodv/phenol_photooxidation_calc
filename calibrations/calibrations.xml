@@ -63,3 +63,45 @@
       <concentration unit="μM">35000</concentration>
     </point>
   </calibration>
+  <calibration>
+    <solute>h2o2</solute>
+    <solvent>water</solvent>
+    <wavelength unit="nm">225</wavelength>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/h2o2/h2o2-water_1062.5µM.txt</path>
+      <concentration unit="μM">1062.5</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/h2o2/h2o2-water_2125µM.txt</path>
+      <concentration unit="μM">2125</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/h2o2/h2o2-water_4250µM.txt</path>
+      <concentration unit="μM">4250</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/h2o2/h2o2-water_8500µM.txt</path>
+      <concentration unit="μM">8500</concentration>
+    </point>
+  </calibration>
+  <calibration>
+    <solute>hydroquinone</solute>
+    <solvent>water</solvent>
+    <wavelength unit="nm">288</wavelength>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/hydroquinone/hydroquinone-water_28.75µM.txt</path>
+      <concentration unit="μM">28.75</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/hydroquinone/hydroquinone-water_57.5µM.txt</path>
+      <concentration unit="μM">57.5</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/hydroquinone/hydroquinone-water_115µM.txt</path>
+      <concentration unit="μM">115</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/hydroquinone/hydroquinone-water_230µM.txt</path>
+      <concentration unit="μM">230</concentration>
+    </point>
+  </calibration>

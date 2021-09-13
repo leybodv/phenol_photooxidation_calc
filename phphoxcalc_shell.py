@@ -76,7 +76,9 @@ class PhPhOxCalcShell(cmd.Cmd):
         """
         arguments = self.parse_args(arg)
         tree = ET.parse(arguments['file'])
-        root = tree.getroot()
+        calibrations = tree.getroot()
+        for calibration in calibrations:
+            solute = calibration.find('solute').text if calibration.find('solute') is not None
 
     def do_processexperiments(self, arg):
         """

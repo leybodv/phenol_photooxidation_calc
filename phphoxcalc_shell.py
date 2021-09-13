@@ -69,7 +69,9 @@ class PhPhOxCalcShell(cmd.Cmd):
                     path to folder with calibration files in a format <wavelength><tab><absorbance> with single header row
         """
         arguments = self.parse_args(arg)
-        self.calibrations.append(Calibration(solute=arguments['solute'], solvent=arguments['solvent'], folder=arguments['path']))
+        calibration = Calibration(solute=arguments['solute'], solvent=arguments['solvent'], folder=arguments['path'])
+        self.calibrations.append(calibration)
+        Plotter().plot_calibration(calibration)
 
     def do_addcalibrations(self, arg):
         """

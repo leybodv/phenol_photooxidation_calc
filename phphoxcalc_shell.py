@@ -75,6 +75,16 @@ class PhPhOxCalcShell(cmd.Cmd):
 
     def do_addcalibrations(self, arg):
         """
+        add calibrations using xml structured configuration file with all relevant data for each calibration specified
+
+        parameters
+        ----------
+        arg : str
+            arguments provided by user in a form of key=value pairs separated by space. allowed values:
+                file=<path-to-file>
+                    path to xml file with description of calibration data
+                plot='True'|'False'
+                    if True all calibrations will be plotted
         """
         arguments = self.parse_args(arg)
         tree = ET.parse(arguments['file'])

@@ -105,3 +105,25 @@
       <concentration unit="μM">230</concentration>
     </point>
   </calibration>
+  <calibration>
+    <solute>phenol</solute>
+    <solvent>water</solvent>
+    <wavelength unit="nm">270</wavelength>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/phenol/phenol-water_33.75µM.txt</path>
+      <concentration unit="μM">33.75</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/phenol/phenol-water_67.5µM.txt</path>
+      <concentration unit="μM">67.5</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/phenol/phenol-water_135µM.txt</path>
+      <concentration unit="μM">135</concentration>
+    </point>
+    <point>
+      <path>/home/d/git/phenol_photooxidation_calc/calibrations/phenol/phenol-water_270µM.txt</path>
+      <concentration unit="μM">270</concentration>
+    </point>
+  </calibration>
+</calibrations>

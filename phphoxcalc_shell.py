@@ -77,8 +77,17 @@ class PhPhOxCalcShell(cmd.Cmd):
         arguments = self.parse_args(arg)
         tree = ET.parse(arguments['file'])
         calibrations = tree.getroot()
-        for calibration in calibrations:
-            solute = calibration.find('solute').text if calibration.find('solute') is not None
+        for calibration_element in calibrations:
+            solute = calibration_element.find('solute').text
+            solvent = calibration_element.find('solvent').text
+            wavelength = calibration_element.find('wavelength').text
+            points = list()
+            for point in calibration_element.findall('point'):
+                points.append((point.find('path').text, point.find('concentration').text))
+            calibration = Calibration(solute=solute, solvent=solvent, wavelength=wavelength, points=points)
+            self.calibrations.append(calibration)
+            if arguments['plot'] == 'True':
+                Plotter().plot_calibration(calibration)
 
     def do_processexperiments(self, arg):
         """

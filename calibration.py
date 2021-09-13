@@ -22,9 +22,9 @@ class Calibration():
         coefficient in the equation absorbance = coefficient * concentration, which is determined from the calibration data
     """
 
-    def __init__(self, solute, solvent, folder):
+    def __init__(self, solute:str, solvent:str, folder:str or Path=None, wavelength:str or float=None, points:list[tuple[str or Path, str or float]]=None):
         """
-        assigns solute and solvent to instance variables, parses calibration data in folder, asks user for wavelength to use for calibration and calculates calibration coefficient
+        assigns solute and solvent to instance variables, parses calibration data in folder or uses points (list of tuples with path to calibration file and concentration) to parse data. asks user for wavelength or gets it as parameter to use for calibration and calculates calibration coefficient
 
         parameters
         ----------
@@ -32,17 +32,30 @@ class Calibration():
             name of solute
         solvent : str
             name of solvent
-        folder : str or Path
-            path to folder with files containing calibration spectra
+        folder : str or Path or None
+            path to folder with files containing calibration spectra, if None, method expects points with relevant data to be provided
+        wavelength : str or float or None
+            wavelength used for calculation of calibration coefficients, if None, program asks user to input wavelength
+        points : list[tuple] or None
+            list of (path-to-calibration-file, concentration) pairs, if None method expects folder with files containing calibration spectra
+            path-to-calibration-file : str or Path
+                path to file with calibration spectrum data
+            concentration : str or float
+                concentration of solute used to make calibration spectrum
         """
-        from plotter import Plotter
         self.solute = solute
         self.solvent = solvent
-        self.calibration_points = self.parse_calibration_data(folder)
-        self.calibration_wavelength = self.get_wavelength_from_user(self.calibration_points)
+        if folder is not None and points is None:
+            self.calibration_points = self.parse_calibration_data(folder)
+        elif folder is None and points is not None:
+            self.calibration_points = self.parse_calibration_points(points)
+        else:
+            raise Exception('you must specify either folder or points')
+        if wavelength is None:
+            self.calibration_wavelength = self.get_wavelength_from_user(self.calibration_points)
+        else:
+            self.calibration_wavelength = float(wavelength)
         self.calibration_coefficient = self.find_calibration_coefficient(self.calibration_wavelength, self.calibration_points)
-        plotter = Plotter()
-        plotter.plot_calibration(self)
 
     def get_solute(self) -> str:
         """

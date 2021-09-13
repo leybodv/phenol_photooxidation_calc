@@ -78,12 +78,39 @@ class PhPhOxCalcShell(cmd.Cmd):
         tree = ET.parse(arguments['file'])
         calibrations = tree.getroot()
         for calibration_element in calibrations:
-            solute = calibration_element.find('solute').text
-            solvent = calibration_element.find('solvent').text
-            wavelength = calibration_element.find('wavelength').text
+            solute_element = calibration_element.find('solute')
+            if solute_element is None:
+                raise Exception('did not find \'solute\' element')
+            solvent_element = calibration_element.find('solvent')
+            if solvent_element is None:
+                raise Exception('did not find \'solvent\' element')
+            wavelength_element = calibration_element.find('wavelength')
+            if wavelength_element is None:
+                raise Exception('did not find \'wavelength\' element')
+            solute = solute_element.text
+            if solute is None:
+                raise Exception('element \'solute\' does not contain any value')
+            solvent = solvent_element.text
+            if solvent is None:
+                raise Exception('element \'solvent\' does not contain any value')
+            wavelength = wavelength_element.text
+            if wavelength is None:
+                raise Exception('element \'wavelength\' does not contain any value')
             points = list()
             for point in calibration_element.findall('point'):
-                points.append((point.find('path').text, point.find('concentration').text))
+                path_element = point.find('path')
+                if path_element is None:
+                    raise Exception('did not find \'path\' element')
+                concentraion_element = point.find('concentration')
+                if concentraion_element is None:
+                    raise Exception('did not find \'concentration\' element')
+                path = path_element.text
+                if path is None:
+                    raise Exception('element \'path\' does not contain any value')
+                concentration = concentraion_element.text
+                if concentration is None:
+                    raise Exception('element \'concentration\' does not contain any value')
+                points.append((path, concentration))
             calibration = Calibration(solute=solute, solvent=solvent, wavelength=wavelength, points=points)
             self.calibrations.append(calibration)
             if arguments['plot'] == 'True':

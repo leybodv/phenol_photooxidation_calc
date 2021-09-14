@@ -116,13 +116,19 @@ class PhPhOxCalcShell(cmd.Cmd):
                 concentraion_element = point.find('concentration')
                 if concentraion_element is None:
                     raise Exception('did not find \'concentration\' element')
+                isreference_element = point.find('isreference')
+                if isreference_element is None:
+                    raise Exception('did not find \'isreference\' element')
                 path = path_element.text
                 if path is None:
                     raise Exception('element \'path\' does not contain any value')
                 concentration = concentraion_element.text
                 if concentration is None:
                     raise Exception('element \'concentration\' does not contain any value')
-                points.append((path, concentration))
+                isreference = isreference_element.text
+                if isreference is None:
+                    raise Exception('element \'isreference\' does not contain any value')
+                points.append((path, concentration, isreference))
             calibration = Calibration(solute=solute, solvent=solvent, wavelength=wavelength, points=points)
             self.calibrations.append(calibration)
             if arguments['plot'] == 'True':

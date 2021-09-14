@@ -112,9 +112,22 @@ class Result():
         from plotter import Plotter
         reference_spectra = list()
         reference_names = list()
+        get_from_user = False
         for calibration in calibrations:
+            if get_from_user:
+                break
+            for calibration_point in calibration.get_points():
+                if calibration_point.isreference() is None:
+                    get_from_user = True
+                    break
+                if calibration_point.isreference():
+                    reference_spectra.append(calibration_point.get_spectrum())
+                    reference_names.append(calibration.get_solute())
+        for calibration in calibrations:
+            if not get_from_user:
+                break
             Plotter().plot_raw_calibration(calibration.calibration_points, calibration.get_solute())
-            concentration = input('which spectrum to use for fitting data? enter concentration: ')
+            concentration = input(f'which spectrum to use for fitting data for {calibration.get_solute()} compound? enter concentration: ')
             concentration = float(concentration)
             reference_spectra.append(calibration.get_spectrum_by_concentration(concentration))
             reference_names.append(calibration.get_solute())

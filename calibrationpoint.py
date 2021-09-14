@@ -11,9 +11,11 @@ class CalibrationPoint():
         concentration of solute used for calibration
     spectrum : Spectrum
         uv-vis spectrum of this calibration point
+    isreference : bool
+        if True, spectrum will be used for experimental spectrum fitting
     """
 
-    def __init__(self, concentration, wavelength, absorbance):
+    def __init__(self, concentration, wavelength, absorbance, isreference):
         """
         assigns parameters to instance variables
 
@@ -25,9 +27,12 @@ class CalibrationPoint():
             array of wavelengths of calibration uv-vis spectrum
         absorbance : numpy.ndarrat[float] or list[float]
             array of absorbances of calibration uv-vis spectrum
+        isreference : bool
+            if True, spectrum will be used for experimental spectrum fitting
         """
         self.concentration = concentration
         self.spectrum = Spectrum(wavelength=wavelength, absorbance=absorbance)
+        self.isreference = isreference
 
     def get_absorbance_at(self, wavelength):
         """

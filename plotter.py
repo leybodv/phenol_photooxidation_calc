@@ -31,6 +31,8 @@ class Plotter():
         ax.set_title(experiment.sample_name)
         for data_point in experiment.data_points:
             ax.plot(data_point.get_wavelength(), data_point.get_absorbance(), label=data_point.time)
+        ax.set_xlabel('Wavelength, nm')
+        ax.set_ylabel('Absorbance')
         ax.legend()
         return ax
 

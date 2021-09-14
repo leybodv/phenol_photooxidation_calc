@@ -15,7 +15,7 @@ class CalibrationPoint():
         if True, spectrum will be used for experimental spectrum fitting, if None, program will ask whether to use this point for fitting later
     """
 
-    def __init__(self, concentration, wavelength, absorbance, isreference=None):
+    def __init__(self, concentration, wavelength, absorbance, isreference:bool=None):
         """
         assigns parameters to instance variables
 
@@ -33,6 +33,11 @@ class CalibrationPoint():
         self.concentration = concentration
         self.spectrum = Spectrum(wavelength=wavelength, absorbance=absorbance)
         self.isreference = isreference
+
+    def is_reference(self):
+        """
+        """
+        return self.isreference
 
     def get_absorbance_at(self, wavelength):
         """

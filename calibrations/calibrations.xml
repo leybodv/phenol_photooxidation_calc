@@ -7,18 +7,22 @@
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/benzoquinone/benzoquinone-water_13.75µM.txt</path>
       <concentration unit="μM">13.75</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/benzoquinone/benzoquinone-water_27.5µM.txt</path>
       <concentration unit="μM">27.5</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/benzoquinone/benzoquinone-water_55µM.txt</path>
       <concentration unit="μM">55</concentration>
+      <isreference>True</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/benzoquinone/benzoquinone-water_110µM.txt</path>
       <concentration unit="μM">110</concentration>
+      <isreference>False</isreference>
     </point>
   </calibration>
   <calibration>
@@ -28,18 +32,22 @@
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/catechol/catechol-water_16.25µM.txt</path>
       <concentration unit="μM">16.25</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/catechol/catechol-water_32.5µM.txt</path>
       <concentration unit="μM">32.5</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/catechol/catechol-water_65µM.txt</path>
       <concentration unit="μM">65</concentration>
+      <isreference>True</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/catechol/catechol-water_130µM.txt</path>
       <concentration unit="μM">130</concentration>
+      <isreference>False</isreference>
     </point>
   </calibration>
   <calibration>
@@ -49,18 +57,22 @@
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/formic-acid/formic-acid-water_4375µM.txt</path>
       <concentration unit="μM">4375</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/formic-acid/formic-acid-water_8750µM.txt</path>
       <concentration unit="μM">8750</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/formic-acid/formic-acid-water_17500µM.txt</path>
       <concentration unit="μM">17500</concentration>
+      <isreference>True</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/formic-acid/formic-acid-water_35000µM.txt</path>
       <concentration unit="μM">35000</concentration>
+      <isreference>False</isreference>
     </point>
   </calibration>
   <calibration>
@@ -70,18 +82,22 @@
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/h2o2/h2o2-water_1062.5µM.txt</path>
       <concentration unit="μM">1062.5</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/h2o2/h2o2-water_2125µM.txt</path>
       <concentration unit="μM">2125</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/h2o2/h2o2-water_4250µM.txt</path>
       <concentration unit="μM">4250</concentration>
+      <isreference>True</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/h2o2/h2o2-water_8500µM.txt</path>
       <concentration unit="μM">8500</concentration>
+      <isreference>False</isreference>
     </point>
   </calibration>
   <calibration>
@@ -91,18 +107,22 @@
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/hydroquinone/hydroquinone-water_28.75µM.txt</path>
       <concentration unit="μM">28.75</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/hydroquinone/hydroquinone-water_57.5µM.txt</path>
       <concentration unit="μM">57.5</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/hydroquinone/hydroquinone-water_115µM.txt</path>
       <concentration unit="μM">115</concentration>
+      <isreference>True</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/hydroquinone/hydroquinone-water_230µM.txt</path>
       <concentration unit="μM">230</concentration>
+      <isreference>False</isreference>
     </point>
   </calibration>
   <calibration>
@@ -112,18 +132,22 @@
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/phenol/phenol-water_33.75µM.txt</path>
       <concentration unit="μM">33.75</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/phenol/phenol-water_67.5µM.txt</path>
       <concentration unit="μM">67.5</concentration>
+      <isreference>False</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/phenol/phenol-water_135µM.txt</path>
       <concentration unit="μM">135</concentration>
+      <isreference>True</isreference>
     </point>
     <point>
       <path>/home/d/git/phenol_photooxidation_calc/calibrations/phenol/phenol-water_270µM.txt</path>
       <concentration unit="μM">270</concentration>
+      <isreference>False</isreference>
     </point>
   </calibration>
 </calibrations>

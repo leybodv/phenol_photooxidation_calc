@@ -112,6 +112,26 @@ class Calibration():
                 calibration_points.append(CalibrationPoint(concentration, wavelength, absorbance))
         return calibration_points
 
+    def parse_calibration_points(self, points:list[tuple[str or Path, str or float]]) -> list[CalibrationPoint]:
+        """
+        parse calibration points provided as list of path-to-data-file and concentration pairs
+
+        parameters
+        ----------
+        points : list[tuple]
+            list of path-to-data-file and concentration pairs
+
+        returns
+        -------
+        calibration_points : list[CalibrationPoint]
+            calibration points for different compounds
+        """
+        calibration_points = list()
+        for path, concentration in points:
+            wavelength, absorbance = UvVisParser().parse_uvvis(Path(path))
+            calibration_points.append(CalibrationPoint(float(concentration), wavelength, absorbance))
+        return calibration_points
+
     def find_calibration_coefficient(self, calibration_wavelength, calibration_points):
         """
         finds calibration coefficient using least squares method from calibration data, implemented by scipy.optimize.curve_fit method. calibration coefficient is parameter in an equation absorbance = coefficient * concentration. absorbance value is taken at calibration wavelength

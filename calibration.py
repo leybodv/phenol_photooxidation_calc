@@ -59,6 +59,17 @@ class Calibration():
             self.calibration_wavelength = float(wavelength)
         self.calibration_coefficient = self.find_calibration_coefficient(self.calibration_wavelength, self.calibration_points)
 
+    def get_points(self) -> list[CalibrationPoint]:
+        """
+        getter to obtain calibration points
+
+        returns
+        -------
+        calibration_points : list[CalibrationPoint]
+            list of calibration points
+        """
+        return self.calibration_points
+
     def get_solute(self) -> str:
         """
         getter to obtain solute name

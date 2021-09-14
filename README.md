@@ -37,4 +37,5 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 - ask user to add calibrations for benzoquinone, catechol, formic acid, hydroquinone, h2o2 and phenol automatically and choose predefined reference spectra to fit experimental data
 - add time to the title of plots with fitting of experimental spectrum with references
 - add plot and axes titles to calibration plots
+- add axes titles to results plot
 - remove all interaction with user from Calibration class

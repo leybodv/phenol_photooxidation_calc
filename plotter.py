@@ -96,7 +96,7 @@ class Plotter():
             calibration_y_calc.append(calibration.linear_func(point.get_concentration(), calibration.calibration_coefficient))
         ax_uvvis.axvline(x=calibration.calibration_wavelength, color='red')
         ax_calibration.scatter(calibration_x, calibration_y_data, c='red', label='experimental points')
-        ax_calibration.plot(calibration_x, calibration_y_calc, c='blue', label=f'a = {calibration.get_calibration_coefficient()} * C')
+        ax_calibration.plot(calibration_x, calibration_y_calc, c='blue', label=f'a = {calibration.get_calibration_coefficient():.3e} * C')
         ax_uvvis.set_xlabel('Wavelength, nm')
         ax_uvvis.set_ylabel('Absorbance')
         ax_calibration.set_xlabel('Concentration, μM')

@@ -128,7 +128,7 @@ class PhPhOxCalcShell(cmd.Cmd):
                 isreference = isreference_element.text
                 if isreference is None:
                     raise Exception('element \'isreference\' does not contain any value')
-                points.append((path, concentration, bool(isreference)))
+                points.append((path, concentration, isreference == 'True'))
             calibration = Calibration(solute=solute, solvent=solvent, wavelength=wavelength, points=points)
             self.calibrations.append(calibration)
             if arguments['plot'] == 'True':

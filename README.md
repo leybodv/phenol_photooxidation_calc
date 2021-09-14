@@ -34,6 +34,5 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 &emsp;quits program\
 
 # TODO
-- add plot and axes titles to calibration plots
 - add axes titles to results plot
 - add axes labels for experimental results

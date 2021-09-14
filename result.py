@@ -117,10 +117,10 @@ class Result():
             if get_from_user:
                 break
             for calibration_point in calibration.get_points():
-                if calibration_point.isreference() is None:
+                if calibration_point.is_reference() is None:
                     get_from_user = True
                     break
-                if calibration_point.isreference():
+                if calibration_point.is_reference():
                     reference_spectra.append(calibration_point.get_spectrum())
                     reference_names.append(calibration.get_solute())
         for calibration in calibrations:

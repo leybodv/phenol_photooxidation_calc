@@ -34,7 +34,6 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 &emsp;quits program\
 
 # TODO
-- add time to the title of plots with fitting of experimental spectrum with references and axes titles
 - add plot and axes titles to calibration plots
 - add axes titles to results plot
-- remove all interaction with user from Calibration class
+- add axes labels for experimental results

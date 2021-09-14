@@ -5,6 +5,7 @@ from datapoint import DataPoint
 from result import Result
 from resultpoint import ResultPoint
 from experiment import Experiment
+from calibration import Calibration
 
 class Plotter():
     """
@@ -75,7 +76,7 @@ class Plotter():
         ax.legend()
         plt.show(block=False)
 
-    def plot_calibration(self, calibration):
+    def plot_calibration(self, calibration:Calibration):
         """
         plots results of calibration as uv-vis spectra with vertical line at wavelength used for calibration and absorbance vs. concentration data, experimental and fitted by linear function
 
@@ -94,9 +95,15 @@ class Plotter():
             calibration_y_data.append(point.get_absorbance_at(calibration.calibration_wavelength))
             calibration_y_calc.append(calibration.linear_func(point.get_concentration(), calibration.calibration_coefficient))
         ax_uvvis.axvline(x=calibration.calibration_wavelength, color='red')
-        ax_calibration.scatter(calibration_x, calibration_y_data, c='red')
-        ax_calibration.plot(calibration_x, calibration_y_calc, c='blue')
+        ax_calibration.scatter(calibration_x, calibration_y_data, c='red', label='experimental points')
+        ax_calibration.plot(calibration_x, calibration_y_calc, c='blue', label=f'a = {calibration.get_calibration_coefficient()} * C')
+        ax_uvvis.set_xlabel('Wavelength, nm')
+        ax_uvvis.set_ylabel('Absorbance')
+        ax_calibration.set_xlabel('Concentration, μM')
+        ax_calibration.set_ylabel('Absorbance')
         ax_uvvis.legend()
+        ax_calibration.legend()
+        plt.suptitle(calibration.get_solute())
         plt.show(block=False)
 
     def plot_results(self, results:list[Result]):

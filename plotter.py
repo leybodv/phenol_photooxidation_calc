@@ -128,6 +128,8 @@ class Plotter():
                 name, xy = points_dict.popitem()
                 ax.set_title(name)
                 ax.plot(xy[0], xy[1], linestyle='--', marker='.')
+                ax.set_xlabel('time, min')
+                ax.set_ylabel('concentration, μM')
             else:
                 cols = math.ceil(math.sqrt(len(points_dict)))
                 rows = math.ceil(len(points_dict) / cols)
@@ -139,6 +141,8 @@ class Plotter():
                         name, xy = points_dict.popitem()
                         axs[row,col].set_title(name)
                         axs[row,col].plot(xy[0], xy[1], linestyle='--', marker='.')
+                        axs[row,col].set_xlabel('time, min')
+                        axs[row,col].set_ylabel('concentration, μM')
             plt.suptitle(result.get_name())
             plt.show(block=False)
 

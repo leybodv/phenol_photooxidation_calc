@@ -22,7 +22,7 @@ class Calibration():
         coefficient in the equation absorbance = coefficient * concentration, which is determined from the calibration data
     """
 
-    def __init__(self, solute:str, solvent:str, folder:str or Path=None, wavelength:str or float=None, points:list[tuple[str or Path, str or float]]=None):
+    def __init__(self, solute:str, solvent:str, folder:str or Path=None, wavelength:str or float=None, points:list[tuple[str or Path, str or float, bool]]=None):
         """
         assigns solute and solvent to instance variables, parses calibration data in folder or uses points (list of tuples with path to calibration file and concentration) to parse data. asks user for wavelength or gets it as parameter to use for calibration and calculates calibration coefficient
 
@@ -37,11 +37,13 @@ class Calibration():
         wavelength : str or float or None
             wavelength used for calculation of calibration coefficients, if None, program asks user to input wavelength
         points : list[tuple] or None
-            list of (path-to-calibration-file, concentration) pairs, if None method expects folder with files containing calibration spectra
+            list of (path-to-calibration-file, concentration, isreference) values, if None method expects folder with files containing calibration spectra
             path-to-calibration-file : str or Path
                 path to file with calibration spectrum data
             concentration : str or float
                 concentration of solute used to make calibration spectrum
+            isreference : bool
+                use this calibration spectrum as reference for fitting experimental data
         """
         self.solute = solute
         self.solvent = solvent
@@ -112,14 +114,14 @@ class Calibration():
                 calibration_points.append(CalibrationPoint(concentration, wavelength, absorbance))
         return calibration_points
 
-    def parse_calibration_points(self, points:list[tuple[str or Path, str or float]]) -> list[CalibrationPoint]:
+    def parse_calibration_points(self, points:list[tuple[str or Path, str or float, bool]]) -> list[CalibrationPoint]:
         """
         parse calibration points provided as list of path-to-data-file and concentration pairs
 
         parameters
         ----------
         points : list[tuple]
-            list of path-to-data-file and concentration pairs
+            list of path-to-data-file, concentration, isreference values
 
         returns
         -------
@@ -127,9 +129,9 @@ class Calibration():
             calibration points for different compounds
         """
         calibration_points = list()
-        for path, concentration in points:
+        for path, concentration, isreference in points:
             wavelength, absorbance = UvVisParser().parse_uvvis(Path(path))
-            calibration_points.append(CalibrationPoint(float(concentration), wavelength, absorbance))
+            calibration_points.append(CalibrationPoint(float(concentration), wavelength, absorbance, isreference))
         return calibration_points
 
     def find_calibration_coefficient(self, calibration_wavelength, calibration_points):

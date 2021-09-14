@@ -153,5 +153,8 @@ class Plotter():
             ax.plot(corrected_reference_spectrum.get_wavelength(), corrected_reference_spectrum.get_absorbance(), linestyle='--', label=reference_name)
             sum_absorbance = sum_absorbance + corrected_reference_spectrum.get_absorbance()
         ax.plot(datapoint.get_wavelength(), sum_absorbance, label='sum')
+        ax.set_title(f'time = {datapoint.get_time()}')
+        ax.set_xlabel('Wavelength, nm')
+        ax.set_ylabel('Absorbance')
         ax.legend()
         plt.show(block=False)

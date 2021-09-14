@@ -17,6 +17,11 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 &emsp;&emsp;`<solvent>`: solvent used for calibration\
 &emsp;&emsp;`<path>`: path to folder with calibration data in a format \<wavelength\>\<tab\>\<absorbance\> with single header row\
 \
+`addcalibrations file=<path to xml file> plot=<plot results>`\
+&emsp;adds uv-vis spectra for absorbance vs. concentration calibration using xml structured file with information for each compound\
+&emsp;&emsp;`<path to xml file>`: path to xml file with information for each compound. Sample xml file can be found in calibrations folder\
+&emsp;&emsp;`<plot results>`: True|False, if True, plot results of calibration for each compound in xml file
+\
 `processexperiments verbose=<verbosity>`\
 &emsp;finds concentrations of phenol oxidation products vs. time based on experimental and calibration data\
 &emsp;&emsp;`<verbosity>`: True|False, if True, plots of fitting experimental spectra by reference spectra will be shown\

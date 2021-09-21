@@ -50,6 +50,17 @@ class Experiment():
             print(f'Cannot recognize experimental data of format {data_format}')
             return
 
+    def get_raw_data_path(self) -> Path:
+        """
+        getter to obtain raw data path value
+
+        returns
+        -------
+        raw_data_path : Path
+            path to raw data folder|file
+        """
+        return self.raw_data_path
+
     def get_phenol_init_concentration(self) -> float:
         """
         getter to obtain initial concentration of phenol in μM

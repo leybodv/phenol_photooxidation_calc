@@ -114,7 +114,7 @@ class ResultPoint():
             coefficients_guess.append((bl + bh) / 2)
             bounds_low.append(bl)
             bounds_high.append(bh)
-        fit_results = spopt.least_squares(self.get_residuals_y, coefficients_guess, bounds=(bounds_low, bounds_high), loss='linear', args=(truncated_reference_spectra, truncated_spectrum))
+        fit_results = spopt.least_squares(self.get_residuals_y, coefficients_guess, bounds=(bounds_low, bounds_high), loss='cauchy', f_scale=0.1, args=(truncated_reference_spectra, truncated_spectrum))
         return fit_results.x
 
     def get_residuals_y(self, coefficients:list[float], reference_spectra:list[Spectrum], experimental_spectrum:Spectrum) -> np.ndarray:

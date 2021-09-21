@@ -1,4 +1,5 @@
 import numpy as np
+from pathlib import Path
 from uvvisparser import UvVisParser
 from datapoint import DataPoint
 
@@ -10,7 +11,7 @@ class Experiment():
     ------------------
     sample_name : str
         photocatalyst sample's id
-    raw_data_path : str
+    raw_data_path : Path
         path to file with uv-vis spectra
     data_points : list[DataPoint]
         collection of data points with uv-vis spectra and times
@@ -38,7 +39,7 @@ class Experiment():
             initial concentration of peroxide in μM
         """
         self.sample_name = sample_name
-        self.raw_data_path = raw_data_path
+        self.raw_data_path = Path(raw_data_path)
         self.phenol_init_conc = float(phenol_init_conc)
         self.peroxide_init_conc = float(peroxide_init_conc)
         if data_format == 'file':

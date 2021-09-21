@@ -170,6 +170,7 @@ class PhPhOxCalcShell(cmd.Cmd):
                     points_dict[name][0].append(point.get_time())
                     points_dict[name][1].append(concentration)
             for compound in points_dict:
+                print(f'{points_dict[compound] = }') #LOG
                 file = path.joinpath(f'{experiment.get_sample_name()}_{compound}.dat')
                 with file.open(mode='w') as f:
                     f.write('time\tconcentration\n')

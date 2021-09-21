@@ -61,6 +61,17 @@ class Experiment():
         """
         return self.raw_data_path
 
+    def get_sample_name(self) -> str:
+        """
+        getter to obtain sample's name
+
+        returns
+        -------
+        sample_name : str
+            photocatalyst sample's id
+        """
+        return self.sample_name
+
     def get_phenol_init_concentration(self) -> float:
         """
         getter to obtain initial concentration of phenol in μM

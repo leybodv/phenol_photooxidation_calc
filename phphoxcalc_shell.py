@@ -152,6 +152,12 @@ class PhPhOxCalcShell(cmd.Cmd):
 
     def do_exportresults(self, arg):
         """
+        exports results to <folder-with-raw-data>/result/<sample-name>_<reference-compound>.dat files
+
+        parameters
+        ----------
+        arg : str
+            not used here
         """
         for result, experiment in zip(self.results, self.experiments):
             path = experiment.get_raw_data_path()
@@ -170,13 +176,12 @@ class PhPhOxCalcShell(cmd.Cmd):
                     points_dict[name][0].append(point.get_time())
                     points_dict[name][1].append(concentration)
             for compound in points_dict:
-                print(f'{points_dict[compound] = }') #LOG
                 file = path.joinpath(f'{experiment.get_sample_name()}_{compound}.dat')
                 with file.open(mode='w') as f:
                     f.write('time\tconcentration\n')
-                    f.write('min\tμM')
-                    for time, concentration in points_dict[compound]:
-                        f.write(f'{time}\t{concentration}')
+                    f.write('min\tμM\n')
+                    for time, concentration in zip(points_dict[compound][0], points_dict[compound][1]):
+                        f.write(f'{time}\t{concentration}\n')
 
     def do_execute(self, arg):
         """

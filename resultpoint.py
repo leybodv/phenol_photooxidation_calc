@@ -166,7 +166,8 @@ class ResultPoint():
         for coefficient, spectrum, calibration_coefficient, calibration_wavelength in zip(coefficients, reference_spectra, calibration_coefficients, calibration_wavelengths):
             corrected_spectrum = Spectrum(wavelength=spectrum.get_wavelength(), absorbance=spectrum.get_absorbance()*coefficient)
             calibration_absorbance = corrected_spectrum.get_absorbance_at(calibration_wavelength)
-            concentrations.append(calibration_absorbance / calibration_coefficient)
+            concentration = calibration_absorbance / calibration_coefficient
+            concentrations.append(concentration)
         return np.array(concentrations)
 
     def get_reference_names(self) -> list:

@@ -150,6 +150,33 @@ class PhPhOxCalcShell(cmd.Cmd):
             self.results.append(Result(experiment, self.calibrations, verbose=(arguments["verbose"] == "True")))
         Plotter().plot_results(self.results)
 
+    def do_exportresults(self, arg):
+        """
+        """
+        for result, experiment in zip(self.results, self.experiments):
+            path = experiment.get_raw_data_path()
+            if path.is_dir():
+                path = path.joinpath('result')
+            elif path.is_file():
+                path = path.with_name('result')
+            else:
+                raise Exception(f'{path} is not a valid path')
+            path.mkdir(exist_ok=True)
+            points_dict = {}
+            for point in result.get_points():
+                for name, concentration in zip(point.get_reference_names(), point.get_concentrations()):
+                    if name not in points_dict:
+                        points_dict[name] = (list(), list())
+                    points_dict[name][0].append(point.get_time())
+                    points_dict[name][1].append(concentration)
+            for compound in points_dict:
+                file = path.joinpath(f'{experiment.get_sample_name()}_{compound}.dat')
+                with file.open(mode='w') as f:
+                    f.write('time\tconcentration\n')
+                    f.write('min\tμM')
+                    for time, concentration in points_dict[compound]:
+                        f.write(f'{time}\t{concentration}')
+
     def do_execute(self, arg):
         """
         executes command in file line-by-line

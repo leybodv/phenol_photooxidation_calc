@@ -49,9 +49,10 @@ class UvVisParser():
         data_points = list()
         for i in range(len(data)):
             if i != 0:
-                absorbance = data[i]
-                if np.any(data[i] < 0):
-                    absorbance = data[i] + abs(data[i].min())
+                # absorbance = data[i]
+                # if np.any(data[i] < 0):
+                #     absorbance = data[i] + abs(data[i].min())
+                absorbance = data[i] - data[i].min()
                 data_points.append(DataPoint(time=header[i], wavelength=data[0], absorbance=absorbance))
         data_points.sort(key=lambda point: point.get_time())
         return data_points
@@ -97,6 +98,7 @@ class UvVisParser():
             array of absorbances of uv-vis spectrum
         """
         wavelength, absorbance = np.loadtxt(fname = file, delimiter='\t', unpack=True, encoding='utf-8', skiprows=1)
-        if np.any(absorbance < 0):
-            absorbance = absorbance + abs(absorbance.min())
+        absorbance = absorbance - absorbance.min()
+        # if np.any(absorbance < 0):
+        #     absorbance = absorbance + abs(absorbance.min())
         return (wavelength, absorbance)

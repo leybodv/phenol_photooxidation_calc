@@ -97,7 +97,7 @@ class ResultPoint():
                 if ref_compound == 'phenol':
                     bh = phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
                 elif ref_compound == 'h2o2':
-                    bh = peroxide_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
+                    bh = np.inf
                 elif ref_compound in ['benzoquinone', 'catechol', 'hydroquinone', 'formic-acid']:
                     bh = 10 ** (-9)
                 else:
@@ -111,7 +111,10 @@ class ResultPoint():
                     bh = peroxide_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
                 else:
                     bh = np.inf
-            coefficients_guess.append((bl + bh) / 2)
+            if np.isinf(bl) or np.isinf(bh):
+                coefficients_guess.append(peroxide_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength))
+            else:
+                coefficients_guess.append((bl + bh) / 2)
             bounds_low.append(bl)
             bounds_high.append(bh)
         fit_results = spopt.least_squares(self.get_residuals_y, coefficients_guess, bounds=(bounds_low, bounds_high), loss='cauchy', f_scale=0.1, args=(truncated_reference_spectra, truncated_spectrum))

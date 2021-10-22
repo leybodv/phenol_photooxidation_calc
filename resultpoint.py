@@ -97,7 +97,10 @@ class ResultPoint():
                 if ref_compound == 'phenol':
                     bh = phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
                 elif ref_compound == 'h2o2':
-                    bh = np.inf
+                    if peroxide_init_conc == 0:
+                        bh = 10 ** (-9)
+                    else:
+                        bh = np.inf
                 elif ref_compound in ['benzoquinone', 'catechol', 'hydroquinone', 'formic-acid']:
                     bh = 10 ** (-9)
                 else:
@@ -108,7 +111,7 @@ class ResultPoint():
                 elif ref_compound == 'formic-acid':
                     bh = 6 * phenol_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
                 elif ref_compound == 'h2o2':
-                    bh = peroxide_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
+                    bh = np.inf
                 else:
                     bh = np.inf
             if np.isinf(bl) or np.isinf(bh):

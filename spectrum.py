@@ -26,7 +26,7 @@ class Spectrum():
         self.wavelength = np.array(wavelength)
         self.absorbance = np.array(absorbance)
 
-    def __str__(self):
+    def __repr__(self):
         """
         returns string representation of spectrum as <wavelength><tab><absorbance> pairs
 

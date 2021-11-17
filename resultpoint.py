@@ -100,7 +100,7 @@ class ResultPoint():
                     if peroxide_init_conc == 0:
                         bh = 10 ** (-9)
                     else:
-                        bh = np.inf
+                        bh = peroxide_init_conc * conc_calibration_coef / reference_spectrum.get_absorbance_at(calibration_wavelength)
                 elif ref_compound in ['benzoquinone', 'catechol', 'hydroquinone', 'formic-acid']:
                     bh = 10 ** (-9)
                 else:

@@ -37,7 +37,7 @@ class Spectrum():
         """
         string = ''
         for w, a in zip(self.wavelength, self.absorbance):
-            string = string + w + '\t' + a + '\n'
+            string = string + f'{w}\t{a}\n'
         return string
 
     def get_wavelength(self) -> np.ndarray:

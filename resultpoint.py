@@ -143,6 +143,10 @@ class ResultPoint():
         """
         spectra_sum = np.zeros_like(experimental_spectrum.get_absorbance())
         for coefficient, reference_spectrum in zip(coefficients, reference_spectra):
+            print(f'{len(experimental_spectrum.get_absorbance()) = }') # LOG
+            print(f'{len(reference_spectrum.get_absorbance()) = }') # LOG
+            print(f'{experimental_spectrum = }')
+            print(f'{reference_spectrum = }')
             spectra_sum = spectra_sum + coefficient * reference_spectrum.get_absorbance()
         residuals = spectra_sum - experimental_spectrum.get_absorbance()
         return residuals

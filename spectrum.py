@@ -26,6 +26,20 @@ class Spectrum():
         self.wavelength = np.array(wavelength)
         self.absorbance = np.array(absorbance)
 
+    def __str__(self):
+        """
+        returns string representation of spectrum as <wavelength><tab><absorbance> pairs
+
+        returns
+        -------
+            string : str
+                string representation of spectrum
+        """
+        string = ''
+        for w, a in zip(self.wavelength, self.absorbance):
+            string = string + w + '\t' + a + '\n'
+        return string
+
     def get_wavelength(self) -> np.ndarray:
         """
         getter to obtain wavelengths

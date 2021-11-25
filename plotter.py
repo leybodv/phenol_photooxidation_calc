@@ -53,11 +53,17 @@ class Plotter():
             cols = math.ceil(math.sqrt(len(experiments)))
             rows = math.ceil(len(experiments) / cols)
             fig, axs = plt.subplots(nrows=rows, ncols=cols)
-            for row in range(rows):
+            if rows == 1:
                 for col in range(cols):
                     if not bool(exps_copy):
                         break
-                    self.plotrawexperiment(axs[row,col], exps_copy.pop(0))
+                    self.plotrawexperiment(axs[col], exps_copy.pop(0))
+            else:
+                for row in range(rows):
+                    for col in range(cols):
+                        if not bool(exps_copy):
+                            break
+                        self.plotrawexperiment(axs[row,col], exps_copy.pop(0))
         plt.show(block=False)
 
     def plot_raw_calibration(self, points, compound):

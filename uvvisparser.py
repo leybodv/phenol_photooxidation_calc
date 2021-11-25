@@ -101,7 +101,7 @@ class UvVisParser():
         with file.open(mode='r') as f:
             contents = f.read()
             contents = contents.replace(',', '.')
-        if contents.split(sep='\n')[0].split(sep=' ')[0].isdigit():
+        if contents.split(sep='\n')[0].split(sep='\t')[0].isdigit():
             skiprows = 0
         else:
             skiprows = 1

@@ -1,6 +1,7 @@
 import numpy as np
 from pathlib import Path
 from datapoint import DataPoint
+from io import StringIO
 
 class UvVisParser():
     """
@@ -97,7 +98,14 @@ class UvVisParser():
         absorbance : numpy.ndarray
             array of absorbances of uv-vis spectrum
         """
-        wavelength, absorbance = np.loadtxt(fname = file, delimiter='\t', unpack=True, encoding='utf-8', skiprows=1)
+        with file.open(mode='r') as f:
+            contents = f.read()
+            contents = contents.replace(',', '.')
+        if contents.split(sep='\n')[0].split(sep=' ')[0].isdigit():
+            skiprows = 0
+        else:
+            skiprows = 1
+        wavelength, absorbance = np.loadtxt(fname = StringIO(contents), delimiter='\t', unpack=True, encoding='utf-8', skiprows=skiprows)
         absorbance = absorbance - absorbance.min()
         # if np.any(absorbance < 0):
         #     absorbance = absorbance + abs(absorbance.min())

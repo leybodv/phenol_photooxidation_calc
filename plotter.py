@@ -124,13 +124,7 @@ class Plotter():
             list of results obtained after processing of experimental data
         """
         for result in results:
-            points_dict = {}
-            for point in result.get_points():
-                for name, concentration in zip(point.get_reference_names(), point.get_concentrations()):
-                    if name not in points_dict:
-                        points_dict[name] = (list(), list())
-                    points_dict[name][0].append(point.get_time())
-                    points_dict[name][1].append(concentration)
+            points_dict = self.get_times_concentrations(result)
             if len(points_dict) == 1:
                 fig, ax = plt.subplots()
                 name, xy = points_dict.popitem()
@@ -153,6 +147,61 @@ class Plotter():
                         axs[row,col].set_ylabel('concentration, μM')
             plt.suptitle(result.get_name())
             plt.show(block=False)
+
+    def compare_results(self, results: list[Result]):
+        """
+        """
+        results_list = list()
+        for result in results:
+            points_dict = self.get_times_concentrations(result)
+            results_list.append((result.get_name(), points_dict))
+        is_single_tile = len(results_list[0][1]) == 1
+        if is_single_tile:
+            fig, ax = plt.subplots()
+            ax.set_xlabel('time, min')
+            ax.set_ylabel('concentration, μM')
+        else:
+            cols = math.ceil(math.sqrt(len(results_list[0][1])))
+            rows = math.ceil(len(results_list[0][1]) / cols)
+            fig, ax = plt.subplots(nrows=rows, ncols=cols)
+        for sample in results_list:
+            sample_name = sample[0]
+            points_dict = sample[1]
+            if is_single_tile:
+                name, xy = points_dict.popitem()
+                ax.set_title(name)
+                ax.plot(xy[0], xy[1], linestyle='--', marker='.', label=sample_name)
+            else:
+                cols = math.ceil(math.sqrt(len(points_dict)))
+                rows = math.ceil(len(points_dict) / cols)
+                for row in range(rows):
+                    for col in range(cols):
+                        if not bool(points_dict):
+                            break
+                        name, xy = points_dict.popitem()
+                        ax[row,col].set_title(name)
+                        ax[row,col].plot(xy[0], xy[1], linestyle='--', marker='.', label=sample_name)
+                        ax[row,col].set_xlabel('time, min')
+                        ax[row,col].set_ylabel('concentration, μM')
+        if is_single_tile:
+            handles, labels = ax.get_legend_handles_labels()
+        else:
+            handles, labels = ax[0][0].get_legend_handles_labels()
+        fig.legend(handles, labels)
+        plt.show(block=False)
+
+    def get_times_concentrations(self, result: Result) -> dict[str, tuple[list[float], list[float]]]:
+        """
+        """
+        points_dict = {}
+        for point in result.get_points():
+            for name, concentration in zip(point.get_reference_names(), point.get_concentrations()):
+                if name not in points_dict:
+                    points_dict[name] = (list(), list())
+                points_dict[name][0].append(point.get_time())
+                points_dict[name][1].append(concentration)
+        return points_dict
+
 
     def plot_result_point(self, datapoint:DataPoint, resultpoint:ResultPoint):
         """

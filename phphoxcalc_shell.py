@@ -183,6 +183,17 @@ class PhPhOxCalcShell(cmd.Cmd):
                     for time, concentration in zip(points_dict[compound][0], points_dict[compound][1]):
                         f.write(f'{time}\t{concentration}\n')
 
+    def do_compare_results(self, arg):
+        """
+        """
+        arguments = self.parse_args(arg)
+        sample_names = arguments["samples"].split(sep=';')
+        selected_results = list()
+        for result in self.results:
+            if result.getName() in sample_names:
+                selected_results.append(result)
+        Plotter().compare_results(selected_results)
+
     def do_execute(self, arg):
         """
         executes command in file line-by-line

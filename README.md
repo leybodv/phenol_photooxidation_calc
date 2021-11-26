@@ -39,4 +39,5 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 # TODO
 <ul>
   <li>add docs in phphoxcalc_shell.py and plotter.py</li>
+  <li>add description of compare_results to readme</li>
 </ul>

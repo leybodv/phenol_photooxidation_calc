@@ -38,5 +38,5 @@ List of available commands (can be listed inside program by typing 'help' or '?'
 
 # TODO
 <ul>
-  <li>add do_compare_results method to phenol_photooxidation_calc.py</li>
+  <li>add docs in phphoxcalc_shell.py and plotter.py</li>
 </ul>

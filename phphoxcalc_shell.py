@@ -190,7 +190,7 @@ class PhPhOxCalcShell(cmd.Cmd):
         sample_names = arguments["samples"].split(sep=';')
         selected_results = list()
         for result in self.results:
-            if result.getName() in sample_names:
+            if result.get_name() in sample_names:
                 selected_results.append(result)
         Plotter().compare_results(selected_results)
 

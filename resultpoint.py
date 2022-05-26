@@ -87,7 +87,8 @@ class ResultPoint():
         truncated_spectrum = spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to)
         truncated_reference_spectra = list()
         for reference_spectrum in reference_spectra:
-            truncated_reference_spectra.append(reference_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to))
+            truncated_reference_spectrum = reference_spectrum.truncate(x_from=self.use_points_from, x_to=self.use_points_to)
+            truncated_reference_spectra.append(truncated_reference_spectrum)
         coefficients_guess = list()
         bounds_low = list()
         bounds_high = list()

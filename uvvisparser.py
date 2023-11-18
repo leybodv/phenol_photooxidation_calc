@@ -106,7 +106,25 @@ class UvVisParser():
         else:
             skiprows = 1
         wavelength, absorbance = np.loadtxt(fname = StringIO(contents), delimiter='\t', unpack=True, encoding='utf-8', skiprows=skiprows)
-        absorbance = absorbance - absorbance.min()
+        new_wavelength = []
+        new_absorbance = []
+        for w in range(200, 501, 1):
+            new_wavelength.append(w)
+            if w in wavelength:
+                new_absorbance.append(absorbance[wavelength==w])
+            else:
+                x1 = wavelength[wavelength<w][-1]
+                x2 = wavelength[wavelength>w][0]
+                x = w
+                y1 = absorbance[wavelength==x1]
+                y2 = absorbance[wavelength==x2]
+                dy = y2 - y1
+                dx = x2 - x1
+                y = (x * dy - x1 * dy + y1 * dx) / dx
+                new_absorbance.append(y)
+        new_wavelength = np.array(new_wavelength)
+        new_absorbance = np.array(new_absorbance)
+        new_absorbance = new_absorbance - new_absorbance.min()
         # if np.any(absorbance < 0):
         #     absorbance = absorbance + abs(absorbance.min())
-        return (wavelength, absorbance)
+        return (new_wavelength, new_absorbance)

@@ -111,13 +111,13 @@ class UvVisParser():
         for w in range(200, 501, 1):
             new_wavelength.append(w)
             if w in wavelength:
-                new_absorbance.append(absorbance[wavelength==w])
+                new_absorbance.append(absorbance[wavelength==w][0])
             else:
                 x1 = wavelength[wavelength<w][-1]
                 x2 = wavelength[wavelength>w][0]
                 x = w
-                y1 = absorbance[wavelength==x1]
-                y2 = absorbance[wavelength==x2]
+                y1 = absorbance[wavelength==x1][0]
+                y2 = absorbance[wavelength==x2][0]
                 dy = y2 - y1
                 dx = x2 - x1
                 y = (x * dy - x1 * dy + y1 * dx) / dx
